@@ -1,4 +1,4 @@
-package com.nhnacademy.jdbc.board.index.web;
+package com.nhnacademy.jdbc.board.web;
 
 
 import com.nhnacademy.jdbc.board.user.service.UserService;
@@ -38,7 +38,7 @@ public class LoginController {
                           HttpServletRequest request,
                           HttpServletResponse response,
                           ModelMap modelMap) {
-        if (Objects.nonNull(userLoginService.checkUser(id, pwd))) {
+        if (Objects.nonNull(userLoginService.checkUser(id, pwd).orElse(null))) {
             HttpSession session = request.getSession(true);
             session.setAttribute("id", id);
             modelMap.put("id", id);

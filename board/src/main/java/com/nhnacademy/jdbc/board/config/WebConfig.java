@@ -22,7 +22,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "com.nhnacademy.jdbc.board", useDefaultFilters = false, includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,classes ={Controller.class}))
+@ComponentScan(basePackages = "com.nhnacademy.jdbc.board", useDefaultFilters = false,
+    includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,classes ={Controller.class}))
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, MessageSourceAware {
     private ApplicationContext applicationContext;
     private MessageSource messageSource;
