@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nhnacademy.jdbc.board.user.mapper.UserMapper">
+    <select id="findUser" resultType="com.nhnacademy.jdbc.board.user.domain.User">
+        select *
+        from Users
+        where user_id = #{userId}
+    </select>
+    <select id="findAll" resultType="com.nhnacademy.jdbc.board.user.domain.User">
+        select *
+        from Users
+    </select>
+    <select id="compareUser" resultType="com.nhnacademy.jdbc.board.user.domain.User">
+        select *
+        from Users
+        where user_id = #{userId} and user_pwd = #{userPwd}
+    </select>
+    <insert id="insertUser">
+        insert into Users(id,userId,user_pwd,nickname)
+        values (#{id},'${username}','${user_pwd}','${nickname}')
+    </insert>
+    <update id="updateUser">
+        update Users set nickname = '${nickName}'
+        where id = #{id}
+    </update>
+    <delete id="deleteUser">
+        delete from Users
+        where id =#{id}
+    </delete>
+</mapper>

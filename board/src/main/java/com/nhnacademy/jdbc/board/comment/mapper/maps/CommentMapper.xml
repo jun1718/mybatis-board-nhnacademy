@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nhnacademy.jdbc.board.comment.mapper.CommentMapper">
+    <select id="findById" resultType="com.nhnacademy.jdbc.board.comment.domain.Comment">
+        select * from Comment
+        where board_id =#{id}
+    </select>
+    <select id="findAll" resultType="com.nhnacademy.jdbc.board.comment.domain.Comment">
+        select * from Post
+    </select>
+    <insert id="insertPost">
+        insert into Post (post_no,post_user_no,post_reply_no,post_title,post_content,post_created_at,post_reply_count)
+        values (#{postNo},#{postUserNo},#{postReplyNo},#{postTitle},#{postContent},#{postCreatedAt},#{postReplyCount})
+    </insert>
+    <delete id="deletePost">
+        delete from Post
+        where id=#{id}
+    </delete>
+    <update id="updatePost">
+        update Post set post_title= #{title} and post_content=#{content}
+        where id = #{id}
+    </update>
+
+</mapper>
