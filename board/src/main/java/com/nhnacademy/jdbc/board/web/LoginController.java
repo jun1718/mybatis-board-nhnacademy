@@ -21,10 +21,10 @@ public class LoginController {
         this.userLoginService = userLoginService;
     }
 
-//    @GetMapping(value = {"/","/login"})
-    @GetMapping("/login")
+    @GetMapping(value = {"/", "/login"})
     public String login(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
+
         if (Objects.nonNull(session) && Objects.nonNull(session.getAttribute("id"))) {
             model.addAttribute("id", session.getAttribute("id"));
             return "loginSuccess";
