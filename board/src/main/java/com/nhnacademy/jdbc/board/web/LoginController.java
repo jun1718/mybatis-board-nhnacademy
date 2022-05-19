@@ -21,7 +21,8 @@ public class LoginController {
         this.userLoginService = userLoginService;
     }
 
-    @GetMapping(value = {"/","/login"})
+//    @GetMapping(value = {"/","/login"})
+    @GetMapping("/login")
     public String login(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if (Objects.nonNull(session) && Objects.nonNull(session.getAttribute("id"))) {
@@ -38,6 +39,8 @@ public class LoginController {
                           HttpServletRequest request,
                           HttpServletResponse response,
                           ModelMap modelMap) {
+
+        // @TODO : 보호절로변경
         if (Objects.nonNull(userLoginService.checkUser(id, pwd).orElse(null))) {
             HttpSession session = request.getSession(true);
             session.setAttribute("id", id);

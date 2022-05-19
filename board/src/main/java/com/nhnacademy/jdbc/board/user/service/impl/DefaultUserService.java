@@ -43,7 +43,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<User> checkUser(String username, String userPwd) {
-        return userMapper.compareUser(username, userPwd);
+    public Optional<User> checkUser(String id, String pwd) {
+        return userMapper.compareUser(id, pwd);
     }
 }

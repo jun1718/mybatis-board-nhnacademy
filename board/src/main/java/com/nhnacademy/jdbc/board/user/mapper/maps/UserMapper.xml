@@ -15,7 +15,7 @@
     <select id="compareUser" resultType="com.nhnacademy.jdbc.board.user.domain.User">
         select *
         from Users
-        where user_id = #{userId} and user_pwd = #{userPwd}
+        where id = #{id} and pwd = #{pwd}
     </select>
     <insert id="insertUser">
         insert into Users(id,userId,user_pwd,nickname)

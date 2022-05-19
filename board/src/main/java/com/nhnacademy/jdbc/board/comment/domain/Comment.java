@@ -6,5 +6,6 @@ import lombok.Data;
 public class Comment {
     private final Long commentNo;
     private final Long postNo;
-    private final String commentContent;
+    private final Long userNo;
+    private final String content;
 }

@@ -6,10 +6,15 @@ import lombok.Data;
 @Data
 public class Post {
     private final Long postNo;
-    private final Long postUserNo;
+    private final Long postNoAbove;
+    private final Long userNoWriter;
+    private final Long userNoModifier;
+
+    private final LocalDateTime writedAt;
+    private final LocalDateTime modifiedAt;
+
     private final Long postReplyNo;
-    private final String postTitle;
-    private final String postContent;
-    private final LocalDateTime postCreatedAt;
-    private final Long postReplyCount;
+    private final String title;
+    private final String content;
+    private final Long viewActivate;
 }
