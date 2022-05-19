@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PostMapper {
-    Optional<Post> findById(Long id);
+    Optional<Post> findById(@Param("postNo") Long postNo);
 
     List<Post> findAll();
 
     Long insertPost(Post post);
 
-    Long deletePost(Long id);
+    Long deletePost(@Param("postNo") Long postNo);
 
-    Long updatePost(Long id, @Param("title") String title,@Param("content") String content);
+    Long updatePost(Long id, @Param("title") String title, @Param("content") String content);
 }

@@ -11,15 +11,15 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-    Optional<User> findUser(Long id);
+    Optional<User> findUser(@Param("userNo") Long userNo);
 
     List<User> findAll();
 
-    Long deleteUser(Long id);
+    Long deleteUser(@Param("userNo") Long userNo);
 
     Long insertUser(User user);
 
-    Long updateUser(String nickName,Long id);
+    Long updateUser(@Param("nickName") String nickName,@Param("userNo") Long userNo);
 
-    Optional<User> compareUser(@Param("id") String userId,@Param("pwd")  String userPwd);
+    Optional<User> compareUser(@Param("id") String id,@Param("pwd")  String pwd);
 }

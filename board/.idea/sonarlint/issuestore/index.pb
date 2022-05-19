@@ -1,5 +1,3 @@
 
-a
-1src/main/java/com/nhnacademy/jdbc/board/Base.java,7\b\7bf5ad3f9cb5d18230ebab53db53665390945c75
-u
-Esrc/main/java/com/nhnacademy/jdbc/board/post/service/PostService.java,a\4\a4aea1bb7fc30e9ec75d44a0cdc6259be5e10956
+9
+	board.iml,4\d\4dd4a3ea0db188e3f87f303638ad95b4a50229dc

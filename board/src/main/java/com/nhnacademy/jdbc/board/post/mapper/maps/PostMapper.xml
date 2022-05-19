@@ -4,23 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nhnacademy.jdbc.board.post.mapper.PostMapper">
     <select id="findById" resultType="com.nhnacademy.jdbc.board.post.domain.Post">
-        select * from Post
-        where board_id =#{id}
+        select * from Posts
+        where post_no =#{id}
     </select>
     <select id="findAll" resultType="com.nhnacademy.jdbc.board.post.domain.Post">
-        select * from Post
+        select * from Posts
     </select>
-    <insert id="insertPost">
-        insert into Post (post_no,post_user_no,post_reply_no,post_title,post_content,post_created_at,post_reply_count)
-        values (#{postNo},#{postUserNo},#{postReplyNo},#{postTitle},#{postContent},#{postCreatedAt},#{postReplyCount})
+    <insert id="insertPost">JdbcSubjects
+        insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
+        values (#{postNo},#{postNoAbove},#{userNoWriter},#{userNoModifier},#{writedAt},#{modifiedAt},#{title},#{content},#{viewActivate})
     </insert>
     <delete id="deletePost">
-        delete from Post
-        where id=#{id}
+        delete from Posts
+        where post_no=#{postNo}
     </delete>
     <update id="updatePost">
-        update Post set post_title= #{title} and post_content=#{content}
-        where id = #{id}
+        update Posts set title= #{title} and content=#{content}
+        where post_no = #{postNo}
     </update>
 
 </mapper>
