@@ -40,9 +40,7 @@ public class LoginController {
                           HttpServletResponse response,
                           ModelMap modelMap) {
 
-        // @TODO : 보호절로변경 --> 변경완료
         if (Objects.isNull(userLoginService.checkUser(id, pwd).orElse(null))) {
-
             return "redirect:/login";
         }
         HttpSession session = request.getSession(true);
@@ -51,10 +49,4 @@ public class LoginController {
 
         return "loginSuccess";
     }
-
-    @GetMapping("/loginForm")
-    public String loginForm() {
-        return "loginForm";
-    }
-
 }

@@ -18,6 +18,7 @@ import com.nhnacademy.jdbc.board.user.service.UserService;
 import com.nhnacademy.jdbc.board.user.service.impl.DefaultUserService;
 import java.net.http.HttpRequest;
 import java.util.Objects;
+import java.util.Optional;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -63,12 +64,11 @@ class LoginControllerTest {
     @Test
     void postDoLoginSuccessfulTest() throws Exception {
         User user = new User(1L, "admin", "admin", "admin");
-        when(Objects.isNull(service.checkUser(anyString(), anyString()).orElse(null))).thenReturn(
-            false);
+        when(service.checkUser(anyString(), anyString())).thenReturn(Optional.of(user));
 
         MvcResult mvcResult = mockMvc.perform(post("/login")
                 .param("id", "admin")
-                .param("id", "admin"))
+                .param("pwd", "admin"))
             .andExpect(status().isOk())
             .andExpect(view().name("loginSuccess"))
             .andReturn();
