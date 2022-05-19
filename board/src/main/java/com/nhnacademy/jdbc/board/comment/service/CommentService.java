@@ -13,5 +13,5 @@ public interface CommentService {
 
     Long removeComment(Long id);
 
-    Long modifyComment(Long id,Long userNo,String content);
+    Optional<Comment> modifyComment(Long id,Long userNo,String content);
 }

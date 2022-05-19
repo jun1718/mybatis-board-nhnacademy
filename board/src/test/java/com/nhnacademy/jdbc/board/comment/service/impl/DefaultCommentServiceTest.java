@@ -47,14 +47,23 @@ class DefaultCommentServiceTest {
     void insertComment() {
         when(commentService.insertComment(any())).thenReturn(comment.getCommentNo());
         Long getNo = commentService.insertComment(comment);
-
+        assertThat(getNo).isEqualTo(1L);
+        verify(commentService, times(1)).insertComment(any());
     }
 
     @Test
     void removeComment() {
+        when(commentService.removeComment(any())).thenReturn(comment.getCommentNo());
+        Long removeComment = commentService.removeComment(1L);
+        assertThat(removeComment).isEqualTo(removeComment);
+        verify(commentService, times(1)).removeComment(removeComment);
     }
 
     @Test
     void modifyComment() {
+        Comment testComment = new Comment(1L, 1L, 1L, "테스트 2");
+        when(commentService.modifyComment(any(),any(),any())).thenReturn(Optional.of(testComment));
+        commentService.modifyComment(any(), any(), any());
+        verify(commentService, times(1)).modifyComment(any(),any(),any());
     }
 }

@@ -40,16 +40,16 @@ public class LoginController {
                           HttpServletResponse response,
                           ModelMap modelMap) {
 
-        // @TODO : 보호절로변경
-        if (Objects.nonNull(userLoginService.checkUser(id, pwd).orElse(null))) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("id", id);
-            modelMap.put("id", id);
+        // @TODO : 보호절로변경 --> 변경완료
+        if (Objects.isNull(userLoginService.checkUser(id, pwd).orElse(null))) {
 
-            return "loginSuccess";
-        } else {
             return "redirect:/login";
         }
+        HttpSession session = request.getSession(true);
+        session.setAttribute("id", id);
+        modelMap.put("id", id);
+
+        return "loginSuccess";
     }
 
     @GetMapping("/loginForm")

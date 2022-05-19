@@ -34,7 +34,7 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public Long modifyComment(Long id,Long userNo, String commentContent) {
+    public Optional<Comment> modifyComment(Long id,Long userNo, String commentContent) {
         return commentMapper.updateComment(id,userNo, commentContent);
     }
 

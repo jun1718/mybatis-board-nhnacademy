@@ -17,5 +17,5 @@ public interface CommentMapper {
 
     Long deleteComment(Long commentNo);
 
-    Long updateComment(Long commentNo,Long userNo,@Param("content") String content);
+    Optional<Comment> updateComment(Long commentNo,Long userNo,@Param("content") String content);
 }
