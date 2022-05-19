@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>showPosts</title>
+</head>
+<body>
+    <form action = "/showThroughSearch" method="post">
+        <input type="text" placeholder="검색어를 입력하세요."/>
+        <input type="submit" value="전송"/>
+    </form>
+    <form action = "/showThroughSelectAll" method = "post">
+        <table>
+            <tr th:each="item: ${list}">
+                <td th:text="${item}"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PostController {
     @GetMapping("/showPosts")
     public String getPosts() {
-
         return "showPosts";
     }
 
