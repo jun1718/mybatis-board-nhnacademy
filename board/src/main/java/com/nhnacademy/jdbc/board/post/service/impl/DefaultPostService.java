@@ -5,7 +5,9 @@ import com.nhnacademy.jdbc.board.post.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
 
