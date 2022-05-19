@@ -3,7 +3,6 @@ package com.nhnacademy.jdbc.board.comment.service;
 import com.nhnacademy.jdbc.board.comment.domain.Comment;
 import java.util.List;
 import java.util.Optional;
-import org.apache.ibatis.annotations.Param;
 
 public interface CommentService {
     Optional<Comment> findComment(Long id);
@@ -14,5 +13,5 @@ public interface CommentService {
 
     Long removeComment(Long id);
 
-    Long modifyComment(Long id, String commentContent);
+    Long modifyComment(Long id,Long userNo,String content);
 }

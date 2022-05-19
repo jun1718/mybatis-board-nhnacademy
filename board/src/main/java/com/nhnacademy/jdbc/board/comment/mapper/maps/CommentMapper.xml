@@ -4,23 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nhnacademy.jdbc.board.comment.mapper.CommentMapper">
     <select id="findById" resultType="com.nhnacademy.jdbc.board.comment.domain.Comment">
-        select * from Comment
-        where board_id =#{id}
+        select * from Comments
+        where comment_no =#{commentNo}
     </select>
     <select id="findAll" resultType="com.nhnacademy.jdbc.board.comment.domain.Comment">
-        select * from Post
+        select * from Comments
     </select>
-    <insert id="insertPost">
-        insert into Post (post_no,post_user_no,post_reply_no,post_title,post_content,post_created_at,post_reply_count)
-        values (#{postNo},#{postUserNo},#{postReplyNo},#{postTitle},#{postContent},#{postCreatedAt},#{postReplyCount})
+    <insert id="insertComment">
+        insert into Comments(comment_no, post_no,user_no, content)
+            values(#{commentNo},#{postNo},#{userNo},#{content})
     </insert>
-    <delete id="deletePost">
-        delete from Post
-        where id=#{id}
+    <delete id="deleteComment">
+        delete from Comments
+        where comment_no= #{commentNo}
     </delete>
-    <update id="updatePost">
-        update Post set post_title= #{title} and post_content=#{content}
-        where id = #{id}
+    <update id="updateComment">
+        update Comments set user_no= #{userNo}
+                    and content=#{content}
+        where comment_no = #{commentNo}
     </update>
 
 </mapper>

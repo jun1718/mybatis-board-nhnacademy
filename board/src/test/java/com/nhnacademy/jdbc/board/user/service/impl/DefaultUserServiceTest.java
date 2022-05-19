@@ -9,6 +9,7 @@ class DefaultUserServiceTest {
 
     @BeforeEach
     void setUp() {
+
     }
 
     @Test

@@ -25,16 +25,17 @@ public class DefaultCommentService implements CommentService {
 
     @Override
     public Long insertComment(Comment comment) {
-        return commentMapper.insertPost(comment);
+        return commentMapper.insertComment(comment);
     }
 
     @Override
     public Long removeComment(Long id) {
-        return commentMapper.deletePost(id);
+        return commentMapper.deleteComment(id);
     }
 
     @Override
-    public Long modifyComment(Long id, String commentContent) {
-        return commentMapper.updatePost(id, commentContent);
+    public Long modifyComment(Long id,Long userNo, String commentContent) {
+        return commentMapper.updateComment(id,userNo, commentContent);
     }
+
 }

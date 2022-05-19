@@ -9,13 +9,13 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CommentMapper {
-    Optional<Comment> findById(Long id);
+    Optional<Comment> findById(Long commentNo);
 
     List<Comment> findAll();
 
-    Long insertPost(Comment comment);
+    Long insertComment(Comment comment);
 
-    Long deletePost(Long id);
+    Long deleteComment(Long commentNo);
 
-    Long updatePost(Long id,@Param("commentContent") String commentContent);
+    Long updateComment(Long commentNo,Long userNo,@Param("content") String content);
 }
