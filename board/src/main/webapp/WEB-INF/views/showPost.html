@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, td {
+            border: 1px solid;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <p>
+        게시글번호 : <span th:text = "${postUp.postNo}"></span><br>
+        제목 : <span th:text = "${postUp.postTitle}"></span><br>
+        작성자 id(닉네임): <span th:text = "${postUp.writerId}"></span> (<span th:text = "${postUp.writerNickname}"></span>)<br>
+        작성일시 : <span th:text = "${postUp.postWritedAt}"></span><br>
+
+        <span th:unless = "${postUp.modifierId} == ''" th:text = "'수정자 id(닉네임) :' + ${postUp.modifierId}"></span>
+        <span th:unless = "${postUp.modifierId} == ''" th:text = "'(' + ${postUp.modifierNickname} + ')'"></span><br>
+
+        <span th:unless = "${postUp.modifierId} == ''" th:text = "'수정일시 :' + ${postUp.postModifiedAt}"></span><br><br>
+        내용 : <textarea readonly th:text = "${postUp.postContent}"></textarea><br>
+    </p>
+    <br><br>
+
+
+    <table th:if = "${not #lists.isEmpty(postDown)}">
+        <tr>
+            <td>댓글작성자이름</td>
+            <td>댓글작성자별명</td>
+            <td>댓글내용</td>
+        </tr>
+        <tr th:each="reply : ${postDown}">
+            <td th:text="${reply.userId}"></td>
+            <td th:text="${reply.nickname}"></td>
+            <td th:text="${reply.comment}"></td>
+        </tr>
+    </table>
+
+    <a href = "/register">등록</a>
+    <span th:if = "${postUp.writerId} == ${#session.getAttribute('id')}
+                    or 'admin' == ${#session.getAttribute('id')}">
+        <a th:href = "@{/modify(id=${#session.getAttribute('id')})}">수정</a>
+        <a th:href = "@{/delete(id=${#session.ge2tAttribute('id')})}">삭제</a>
+    </span>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class LoginController {
 
         if (Objects.nonNull(session) && Objects.nonNull(session.getAttribute("id"))) {
             model.addAttribute("id", session.getAttribute("id"));
-            return "loginSuccess";
+            return "redirect:/showPosts";
         } else {
             return "loginForm";
         }
@@ -47,6 +47,6 @@ public class LoginController {
         session.setAttribute("id", id);
         modelMap.put("id", id);
 
-        return "loginSuccess";
+        return "redirect:/login";
     }
 }

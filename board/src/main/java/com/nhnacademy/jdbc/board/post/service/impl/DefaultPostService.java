@@ -1,6 +1,9 @@
 package com.nhnacademy.jdbc.board.post.service.impl;
 
 import com.nhnacademy.jdbc.board.post.domain.Post;
+import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailDown;
+import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
+import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
 import com.nhnacademy.jdbc.board.post.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import java.util.List;
@@ -16,12 +19,17 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public Optional<Post> getPost(Long id) {
-        return postMapper.findById(id);
+    public Optional<PostVoAboutDetailUp> getPostUp(Long id) {
+        return postMapper.findByIdUp(id);
     }
 
     @Override
-    public List<Post> getPostAll() {
+    public List<PostVoAboutDetailDown> getPostDown(Long id) {
+        return postMapper.findByIdDown(id);
+    }
+
+    @Override
+    public List<PostVoAboutList> getPostAll() {
         return postMapper.findAll();
     }
 

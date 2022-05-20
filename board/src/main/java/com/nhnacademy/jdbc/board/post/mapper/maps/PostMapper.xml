@@ -3,14 +3,55 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nhnacademy.jdbc.board.post.mapper.PostMapper">
-    <select id="findById" resultType="com.nhnacademy.jdbc.board.post.domain.Post">
-        select * from Posts
-        where post_no =#{id}
+    <select id="findByIdUp" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp">
+        select  p.post_no as `postNo`,
+                p.title as `postTitle`,
+                p.content as `postContent`,
+                wr.id as `writerId`,
+                wr.nickname as `writerNickname`,
+                ifnull(mo.id,"") as `modifierId`,
+                ifnull(mo.nickname,"") as `modifierNickname`,
+                p.writed_at as `postWritedAt`,
+                p.modified_at as `postModifiedAt`
+        from Posts as p
+                 inner join Users as wr
+                            on p.user_no_writer = wr.user_no
+                 Left join Users as mo
+                           on p.user_no_modifier = mo.user_no
+        where p.post_no = #{postNo}
     </select>
-    <select id="findAll" resultType="com.nhnacademy.jdbc.board.post.domain.Post">
-        select * from Posts
+
+    <select id="findByIdDown" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailDown">
+        select   u.id as `userId`,
+                 u.nickname,
+                 c.content as `commnet`
+        from `Comments` as c
+                 inner join Users as u
+                            on c.user_no = u.user_no
+        where c.post_no = ${postNo}
     </select>
-    <insert id="insertPost">JdbcSubjects
+
+    <select id="findAll" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutList">
+        select    p.post_no as 'postNo',
+                p.title as 'postTitle',
+                wr.id as 'writerId',
+                wr.nickname as 'writerNickname',
+                ifnull(mo.id,'') as 'modifierId',
+                ifnull(mo.nickname,'') as 'modifierNickname',
+                p.writed_at as 'postWritedAt',
+                (
+                    select count(*)
+                    from Comments as c
+                    where p.post_no = c.post_no
+                    ) as 'viewCount'
+        from Posts as p
+                 inner join Users as wr
+                            on p.user_no_writer = wr.user_no
+                 Left join Users as mo
+                           on p.user_no_modifier = mo.user_no
+        order by p.post_no desc;
+    </select>
+    <insert id="insertPost">
         insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
         values (#{postNo},#{postNoAbove},#{userNoWriter},#{userNoModifier},#{writedAt},#{modifiedAt},#{title},#{content},#{viewActivate})
     </insert>

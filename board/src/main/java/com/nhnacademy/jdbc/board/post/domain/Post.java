@@ -13,7 +13,6 @@ public class Post {
     private final LocalDateTime writedAt;
     private final LocalDateTime modifiedAt;
 
-    private final Long postReplyNo;
     private final String title;
     private final String content;
     private final Long viewActivate;

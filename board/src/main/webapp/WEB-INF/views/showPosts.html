@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>showPosts</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <form action = "/showThroughSearch" method="post">
@@ -11,8 +19,27 @@
     </form>
     <form action = "/showThroughSelectAll" method = "post">
         <table>
-            <tr th:each="item: ${list}">
-                <td th:text="${item}"></td>
+            <tr>
+                <th>게시글 번호</th>
+                <th>제목</th>
+                <th>작성자id</th>
+                <th>작성자별명</th>
+                <th>수정자id</th>
+                <th>수정자별명</th>
+                <th>작성일시</td>
+                <th>댓글수</th>
+                <th>조회</th>
+            </tr>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.postNo}"></td>
+                <td th:text="${post.postTitle}"></td>
+                <td th:text="${post.writerId}"></td>
+                <td th:text="${post.writerNickname}"></td>
+                <td th:text="${post.modifierId}"></td>
+                <td th:text="${post.modifierNickname}"></td>
+                <td th:text="${post.postWritedAt}"></td>
+                <td th:text="${post.viewCount}"></td>
+                <td><a th:href = "@{/showPost(id=${post.postNo})}">조회하러가기</a></td>
             </tr>
         </table>
     </form>
