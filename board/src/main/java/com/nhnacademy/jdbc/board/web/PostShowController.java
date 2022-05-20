@@ -23,6 +23,7 @@ public class PostShowController {
         List<PostVoAboutList> posts = postService.getPostAll();
         ModelAndView mav = new ModelAndView("showPosts");
         mav.addObject("posts", posts);
+        System.out.println("안녕");
         return mav;
     }
 
