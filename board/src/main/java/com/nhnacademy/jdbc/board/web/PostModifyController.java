@@ -31,11 +31,6 @@ public class PostModifyController {
                             @RequestParam("postTitle") String postTitle,
                             @RequestParam("postContent") String postContent) {        System.out.println("=====================");
 
-        System.out.println("=====================");
-        System.out.println(postNo);
-        System.out.println(postTitle);
-        System.out.println(postContent);
-        System.out.println("=====================");
         postService.modifyPost(postNo, postTitle, postContent);
         return "redirect:/showPosts";
     }
