@@ -30,7 +30,7 @@
                 <th>댓글수</th>
                 <th>조회</th>
             </tr>
-            <tr th:if = "${post.viewActivate} == 1" th:each="post : ${posts}">
+            <tr th:if = "${post.viewActivate}== 1 or ${#strings.equals(#session.getAttribute('id'), 'admin')}"  th:each="post : ${posts}">
                 <td th:text="${post.postNo}"></td>
                 <td th:text="${post.postTitle}"></td>
                 <td th:text="${post.writerId}"></td>
@@ -40,6 +40,8 @@
                 <td th:text="${post.postWritedAt}"></td>
                 <td th:text="${post.viewCount}"></td>
                 <td><a th:href = "@{/showPost(id=${post.postNo})}">조회하러가기</a></td>
+                <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a href = "/delete">살리기</a></td>
+                <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a href = "/alive">죽이기</a></td>
             </tr>
         </table>
     </form>
