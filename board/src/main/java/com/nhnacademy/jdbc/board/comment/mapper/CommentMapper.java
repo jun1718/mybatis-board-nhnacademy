@@ -1,7 +1,6 @@
 package com.nhnacademy.jdbc.board.comment.mapper;
 
 import com.nhnacademy.jdbc.board.comment.domain.Comment;
-import com.nhnacademy.jdbc.board.post.domain.Post;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,5 +16,5 @@ public interface CommentMapper {
 
     Long deleteComment(Long commentNo);
 
-    Optional<Comment> updateComment(Long commentNo,Long userNo,@Param("content") String content);
+    Optional<Comment> updateComment(Long commentNo, Long userNo, @Param("content") String content);
 }
