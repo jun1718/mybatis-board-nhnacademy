@@ -7,6 +7,7 @@ import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface PostService {
     Optional<PostVoAboutDetailUp> getPostUp(Long id);
     List<PostVoAboutDetailDown> getPostDown(Long id);
@@ -15,7 +16,7 @@ public interface PostService {
 
     Long writePost(Post post);
 
-    Long removePost(Long id);
+    Long removePostOrViewPost(Long id);
 
     Long modifyPost(Long id,String title,String content);
 }

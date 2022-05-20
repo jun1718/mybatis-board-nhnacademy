@@ -56,10 +56,10 @@
         insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
         values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate})
     </insert>
-    <delete id="deletePost">
-        delete from Posts
+    <update id="deleteOrAlive">
+        update Posts set view_activate = view_activate ^ 1
         where post_no=#{postNo}
-    </delete>
+    </update>
     <update id="updatePost">
         update Posts set title= #{title}, content=#{content}
         where post_no = #{postNo}
