@@ -10,6 +10,7 @@ public class Post {
     private final Long userNoWriter;
     private final Long userNoModifier;
 
+    
     private final LocalDateTime writedAt;
     private final LocalDateTime modifiedAt;
 
