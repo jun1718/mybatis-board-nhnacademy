@@ -7,10 +7,6 @@ a
 Ksrc/main/java/com/nhnacademy/jdbc/board/comment/service/CommentService.java,1\f\1f556e8f673b0168205e75832a052aa7881e1e41
 ‡
 Wsrc/main/java/com/nhnacademy/jdbc/board/comment/service/impl/DefaultCommentService.java,8\3\831b4e5327d3133a08a726398345a0dabcb2a32e
-w
-Gsrc/main/java/com/nhnacademy/jdbc/board/post/mapper/maps/PostMapper.xml,7\3\73c2e64c2e928e4156f0b9e3bfa83946c6369f18
-s
-Csrc/main/java/com/nhnacademy/jdbc/board/post/mapper/PostMapper.java,f\a\faebfccf4ad2b7011c2592b39482ef87d18420fc
 u
 Esrc/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.java,2\8\2830adace85817bafa67fb35e753f3a74f1b009d
 n

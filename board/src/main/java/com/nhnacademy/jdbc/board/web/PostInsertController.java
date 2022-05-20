@@ -38,15 +38,16 @@ public class PostInsertController {
                            HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
-        User user = userService.getUserById((String) session.getAttribute("id")).get();
-        Long userNo = user.getUserNo();
-        Long insertedResult = postService.writePost(new Post(null, null, userNo, null,
-                new Date(), null, title, content, true));
-
-        if (!Objects.equals(insertedResult, 1L)) {
-            log.error("db insert 에러");
-           return "redirect:/insert";
+        String attribute = (String)session.getAttribute("id");
+        if(userService.getUserById(attribute).isEmpty()
+            || title.isEmpty()
+            || content.isEmpty()){
+            return "redirect:/insert";
         }
+        User user = userService.getUserById(attribute).get();
+        Long insertedResult = postService.writePost(new Post(
+            null, null, user.getUserNo(), null,
+                new Date(), null, title, content, true));
         return "redirect:/showPosts";
     }
 }
