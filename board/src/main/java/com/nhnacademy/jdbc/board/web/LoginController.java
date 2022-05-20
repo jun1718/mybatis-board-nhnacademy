@@ -25,12 +25,11 @@ public class LoginController {
     public String login(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
 
-        if (Objects.nonNull(session) && Objects.nonNull(session.getAttribute("id"))) {
-            model.addAttribute("id", session.getAttribute("id"));
-            return "redirect:/showPosts";
-        } else {
+        if (Objects.isNull(session)) {
             return "loginForm";
         }
+        model.addAttribute("id", session.getAttribute("id"));
+        return "loginSuccess";
     }
 
     @PostMapping("/login")
@@ -40,13 +39,13 @@ public class LoginController {
                           HttpServletResponse response,
                           ModelMap modelMap) {
 
-        if (Objects.isNull(userLoginService.checkUser(id, pwd).orElse(null))) {
+        if ((userLoginService.checkUser(id, pwd).isEmpty())) {
             return "redirect:/login";
         }
         HttpSession session = request.getSession(true);
         session.setAttribute("id", id);
         modelMap.put("id", id);
 
-        return "redirect:/login";
+        return "loginSuccess";
     }
 }

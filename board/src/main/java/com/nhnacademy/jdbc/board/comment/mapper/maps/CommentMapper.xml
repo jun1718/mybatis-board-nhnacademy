@@ -19,8 +19,7 @@
         where comment_no= #{commentNo}
     </delete>
     <update id="updateComment">
-        update Comments set user_no= #{userNo}
-                    and content=#{content}
+        update Comments set user_no= #{userNo} and content=#{content}
         where comment_no = #{commentNo}
     </update>
 
