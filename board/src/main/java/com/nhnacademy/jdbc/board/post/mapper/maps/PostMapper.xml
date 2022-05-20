@@ -53,7 +53,7 @@
     </select>
     <insert id="insertPost">
         insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
-        values (#{postNo},#{postNoAbove},#{userNoWriter},#{userNoModifier},#{writedAt},#{modifiedAt},#{title},#{content},#{viewActivate})
+        values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate})
     </insert>
     <delete id="deletePost">
         delete from Posts
@@ -63,5 +63,7 @@
         update Posts set title= #{title} and content=#{content}
         where post_no = #{postNo}
     </update>
+
+
 
 </mapper>

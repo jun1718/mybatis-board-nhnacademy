@@ -21,9 +21,8 @@ public class PostShowController {
     @GetMapping("/showPosts")
     public ModelAndView getPosts() {
         List<PostVoAboutList> posts = postService.getPostAll();
-        ModelAndView mav = new ModelAndView("showPosts");
+        ModelAndView mav = new ModelAndView("showPostsForm");
         mav.addObject("posts", posts);
-        System.out.println("안녕");
         return mav;
     }
 
@@ -32,7 +31,7 @@ public class PostShowController {
         PostVoAboutDetailUp postUp = postService.getPostUp(id).orElse(null);
         List<PostVoAboutDetailDown> postDown = postService.getPostDown(id);
 
-        ModelAndView mav = new ModelAndView("showPost");
+        ModelAndView mav = new ModelAndView("showPostForm");
         mav.addObject("postUp", postUp);
         mav.addObject("postDown", postDown);
         return mav;

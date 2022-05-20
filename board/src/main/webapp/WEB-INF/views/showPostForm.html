@@ -10,13 +10,12 @@
             text-align: center;
         }
     </style>
-
 </head>
 <body>
     <p>
         게시글번호 : <span th:text = "${postUp.postNo}"></span><br>
-        제목 : <span th:text = "${postUp.postTitle}"></span><br>
         작성자 id(닉네임): <span th:text = "${postUp.writerId}"></span> (<span th:text = "${postUp.writerNickname}"></span>)<br>
+        제목 : <span th:text = "${postUp.postTitle}"></span><br>
         작성일시 : <span th:text = "${postUp.postWritedAt}"></span><br>
 
         <span th:unless = "${postUp.modifierId} == ''" th:text = "'수정자 id(닉네임) :' + ${postUp.modifierId}"></span>
@@ -44,8 +43,9 @@
     <a href = "/register">등록</a>
     <span th:if = "${postUp.writerId} == ${#session.getAttribute('id')}
                     or 'admin' == ${#session.getAttribute('id')}">
-        <a th:href = "@{/modify(id=${#session.getAttribute('id')})}">수정</a>
-        <a th:href = "@{/delete(id=${#session.ge2tAttribute('id')})}">삭제</a>
+<!--        <a th:href = "@{/modify(id=${postUp.postNo})}">수정</a>-->
+        <a th:href = "@{/modify(postNo=${postUp.postNo})}">수정</a>
+        <a th:href = "@{/delete(id=${#session.getAttribute('id')})}">삭제</a>
     </span>
 </body>
 </html>

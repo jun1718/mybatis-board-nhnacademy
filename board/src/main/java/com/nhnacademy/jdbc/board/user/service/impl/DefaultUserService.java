@@ -17,8 +17,13 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(Long id) {
-        return userMapper.findUser(id);
+    public Optional<User> getUserByNo(Long no) {
+        return userMapper.findUserByNo(no);
+    }
+
+    @Override
+    public Optional<User> getUserById(String id) {
+        return userMapper.findUserById(id);
     }
 
     @Override

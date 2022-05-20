@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.post.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Data;
 
 @Data
@@ -11,10 +12,10 @@ public class Post {
     private final Long userNoModifier;
 
 
-    private final LocalDateTime writedAt;
-    private final LocalDateTime modifiedAt;
+    private final Date writedAt;
+    private final Date modifiedAt;
 
     private final String title;
     private final String content;
-    private final Long viewActivate;
+    private final Boolean viewActivate;
 }
