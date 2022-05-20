@@ -5,20 +5,14 @@
     <title>showModifyForm</title>
 </head>
 <body>
-<form th:object="" action="/modify" method="post" th:object="${postUp}>
-    게시글번호 : <input readonly name = "postNo" type="text" th:value="*{postNo}"><br>
-    작성자id : <input readonly name = "writerId" type="text" th:value="*{writerId}">
-    제목 : <input type="text" th:value="*{postTitle}">
-    작성일시 : <input readonly type="text" th:value="*{postWritedAt}">
-<!--    제목 : <span th:text="${postUp.postTitle}"></span><br>-->
-<!--    작성자 id(닉네임): <span th:text="${postUp.writerId}"></span> (<span th:text="${postUp.writerNickname}"></span>)<br>-->
-<!--    작성일시 : <span th:text="${postUp.postWritedAt}"></span><br>-->
-
-<!--    <input th:if="${not #strings.empty(modifierId)}" th:value=" + ${modifierId}">-->
-
-    <input type="hidden" name = "modifierId" th:value = "*{modifierId}">
-    <input type="hidden" name = "title" th:value = "*{postTitle}">
-    내용 : <input readonly type="text" name = "postContent" th:value="*{postContent}"> <br>
+<form action="/modify" method="post">
+    게시글번호 : <input readonly name = "postNo" type="text" th:value="${postUp.postNo}"><br>
+    작성자id : <input readonly name = "writerId" type="text" th:value="${postUp.writerId}"><br>
+    제목 : <input name = "postTitle" type="text" th:value="${postUp.postTitle}"><br>
+    작성일시 : <input readonly name = "postWritedAt" type="text" th:value="${postUp.postWritedAt}"><br>
+    내용 : <input type="text" name = "postContent" th:value="${postUp.postContent}"> <br>
+    <input type="hidden" name = "modifierId" th:value = "${postUp.modifierId}"><br>
+    <input type="hidden" name = "title" th:value = "${postUp.postTitle}"><br>
 </form>
 
 

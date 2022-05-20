@@ -28,6 +28,6 @@ public class PostModifyController {
     @PostMapping("/modify")
     public String doModify() {
 
-        return "redirect:/showPosts";
+        return "redirect:/showPostsForm";
     }
 }
