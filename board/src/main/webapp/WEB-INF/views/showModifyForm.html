@@ -8,11 +8,14 @@
 <form action="/modify" method="post">
     게시글번호 : <input readonly name = "postNo" type="text" th:value="${postUp.postNo}"><br>
     작성자id : <input readonly name = "writerId" type="text" th:value="${postUp.writerId}"><br>
+    작성자별명 : <input readonly name = "writerNickname" type="text" th:value="${postUp.writerNickname}"><br>
     제목 : <input name = "postTitle" type="text" th:value="${postUp.postTitle}"><br>
     작성일시 : <input readonly name = "postWritedAt" type="text" th:value="${postUp.postWritedAt}"><br>
     내용 : <input type="text" name = "postContent" th:value="${postUp.postContent}"> <br>
+    <input type="submit" value="등록">
     <input type="hidden" name = "modifierId" th:value = "${postUp.modifierId}"><br>
-    <input type="hidden" name = "title" th:value = "${postUp.postTitle}"><br>
+    <input type="hidden" name = "modifierNickname" th:value = "${postUp.modifierNickname}"><br>
+    <input type="hidden" name = "postModifiedAt" th:value = "${postUp.postModifiedAt}"><br>
 </form>
 
 

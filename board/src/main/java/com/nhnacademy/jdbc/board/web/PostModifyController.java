@@ -5,6 +5,7 @@ import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,8 +27,16 @@ public class PostModifyController {
     }
 
     @PostMapping("/modify")
-    public String doModify() {
+    public String doModify(@RequestParam("postNo") Long postNo,
+                            @RequestParam("postTitle") String postTitle,
+                            @RequestParam("postContent") String postContent) {        System.out.println("=====================");
 
-        return "redirect:/showPostsForm";
+        System.out.println("=====================");
+        System.out.println(postNo);
+        System.out.println(postTitle);
+        System.out.println(postContent);
+        System.out.println("=====================");
+        postService.modifyPost(postNo, postTitle, postContent);
+        return "redirect:/showPosts";
     }
 }

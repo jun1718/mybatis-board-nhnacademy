@@ -15,7 +15,5 @@ u
 Esrc/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.java,2\8\2830adace85817bafa67fb35e753f3a74f1b009d
 n
 >src/main/java/com/nhnacademy/jdbc/board/config/RootConfig.java,3\c\3c2120ffe0a0f7a59d64efd97aca3eb07862f21c
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 q
 Asrc/main/java/com/nhnacademy/jdbc/board/config/MybatisConfig.java,a\2\a213f771d1c2c718c6a2de8c8394b4ee5f14a3c5
