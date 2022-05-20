@@ -9,8 +9,10 @@ import com.nhnacademy.jdbc.board.post.service.PostService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
 
@@ -39,9 +41,10 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public Long removePost(Long id) {
-        return postMapper.deletePost(id);
+    public Long removePostOrViewPost(Long id) {
+        return postMapper.deleteOrAlive(id);
     }
+
 
     @Override
     public Long modifyPost(Long id, String title, String content) {

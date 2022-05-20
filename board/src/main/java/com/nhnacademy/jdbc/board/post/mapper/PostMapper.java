@@ -21,7 +21,7 @@ public interface PostMapper {
 
     Long insertPost(@Param("post") Post post);
 
-    Long deletePost(@Param("postNo") Long postNo);
+    Long deleteOrAlive(@Param("postNo") Long postNo);
 
     Long updatePost(Long id, @Param("title") String title, @Param("content") String content);
 
