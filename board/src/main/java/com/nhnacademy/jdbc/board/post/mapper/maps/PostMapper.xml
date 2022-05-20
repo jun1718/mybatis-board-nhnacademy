@@ -60,7 +60,7 @@
         where post_no=#{postNo}
     </delete>
     <update id="updatePost">
-        update Posts set title= #{title} and content=#{content}
+        update Posts set title= #{title}, content=#{content}
         where post_no = #{postNo}
     </update>
 

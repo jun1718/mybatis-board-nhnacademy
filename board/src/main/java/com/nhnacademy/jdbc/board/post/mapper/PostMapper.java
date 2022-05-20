@@ -23,6 +23,6 @@ public interface PostMapper {
 
     Long deletePost(@Param("postNo") Long postNo);
 
-    Long updatePost(Long id, @Param("title") String title, @Param("content") String content);
+    Long updatePost(@Param("postNo") Long postNo, @Param("title") String title, @Param("content") String content);
 
 }

@@ -44,7 +44,7 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public Long modifyPost(Long id, String title, String content) {
-        return postMapper.updatePost(id, title, content);
+    public Long modifyPost(Long postNo, String title, String content) {
+        return postMapper.updatePost(postNo, title, content);
     }
 }
