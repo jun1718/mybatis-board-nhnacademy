@@ -41,7 +41,7 @@ class PostShowControllerTest {
     @Test
     void getPosts() throws Exception {
         PostVoAboutList list = new PostVoAboutList(1L, "a", "af", "b", null, null,
-            null, 0L);
+            null, 0L, 1);
 
         when(service.getPostAll()).thenReturn(List.of(list));
         mockMvc.perform(get("/showPosts"))

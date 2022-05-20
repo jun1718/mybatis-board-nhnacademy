@@ -14,4 +14,5 @@ public class PostVoAboutList {
     private final String modifierNickname;
     private final Date postWritedAt;
     private final Long viewCount;
+    private final int viewActivate;
 }

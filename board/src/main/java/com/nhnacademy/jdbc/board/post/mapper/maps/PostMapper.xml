@@ -43,7 +43,8 @@
                     select count(*)
                     from Comments as c
                     where p.post_no = c.post_no
-                    ) as 'viewCount'
+                    ) as 'viewCount',
+                p.view_activate as 'viewActivate'
         from Posts as p
                  inner join Users as wr
                             on p.user_no_writer = wr.user_no

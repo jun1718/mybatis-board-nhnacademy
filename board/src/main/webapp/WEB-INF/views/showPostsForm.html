@@ -30,7 +30,7 @@
                 <th>댓글수</th>
                 <th>조회</th>
             </tr>
-            <tr th:each="post : ${posts}">
+            <tr th:if = "${post.viewActivate} == 1" th:each="post : ${posts}">
                 <td th:text="${post.postNo}"></td>
                 <td th:text="${post.postTitle}"></td>
                 <td th:text="${post.writerId}"></td>
