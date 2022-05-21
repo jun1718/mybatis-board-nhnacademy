@@ -45,7 +45,8 @@
                     or 'admin' == ${#session.getAttribute('id')}">
 <!--        <a th:href = "@{/modify(id=${postUp.postNo})}">수정</a>-->
         <a th:href = "@{/modify(postNo=${postUp.postNo})}">수정</a>
-        <a th:href = "@{/delete(postNo=${postUp.postNo})}">삭제</a>
+        <a th:href = "@{/deleteAndAlive(postNo=${postUp.postNo})}">삭제</a>
+        <a href = "/showPosts">목록으로가기</a>
     </span>
 </body>
 </html>

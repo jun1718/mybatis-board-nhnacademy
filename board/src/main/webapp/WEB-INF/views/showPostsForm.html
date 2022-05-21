@@ -29,6 +29,8 @@
                 <th>작성일시</td>
                 <th>댓글수</th>
                 <th>조회</th>
+                <th th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}">현재활성화상태(1 : 활성화상태, 0 : 삭제상태)</th>
+                <th th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}">관리자설정</th>
             </tr>
             <tr th:if = "${post.viewActivate}== 1 or ${#strings.equals(#session.getAttribute('id'), 'admin')}"  th:each="post : ${posts}">
                 <td th:text="${post.postNo}"></td>
@@ -40,11 +42,14 @@
                 <td th:text="${post.postWritedAt}"></td>
                 <td th:text="${post.viewCount}"></td>
                 <td><a th:href = "@{/showPost(id=${post.postNo})}">조회하러가기</a></td>
+                <th th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}" th:text = "${post.viewActivate}"></th>
                 <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a th:href = "@{/deleteAndAlive(postNo=${post.postNo})}">살리거나 죽이기</a></td>
             </tr>
         </table>
     </form>
     <br>
     <a href = "/insert">글등록</a>
+    <a href = "/showPosts">목록으로가기</a>
+    <a href = "/logout">로그아웃</a>
 </body>
 </html>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginCheckInterceptor implements HandlerInterceptor {
     private final List<String> urlList = new ArrayList();
 
-    public void blackList() {
+    public void whiteList() {
         urlList.add("/login");
         urlList.add("/");
     }
@@ -21,12 +21,15 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
         HttpSession session = request.getSession(false);
-        blackList();
-        if (((Objects.isNull(session)) || Objects.isNull(session.getAttribute("id"))) &&
-            !(urlList.contains(request.getRequestURI()))) {
+        whiteList();
 
-            response.sendRedirect("/login");
+        if (!urlList.contains(request.getRequestURI())) {
+            if ((Objects.isNull(session)) || Objects.isNull(session.getAttribute("id"))) {
+                response.sendRedirect("/login");
+                return false;
+            }
         }
+
         return true;
     }
 
