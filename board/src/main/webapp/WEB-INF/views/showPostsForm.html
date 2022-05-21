@@ -45,6 +45,13 @@
                 <th th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}" th:text = "${post.viewActivate}"></th>
                 <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a th:href = "@{/deleteAndAlive(postNo=${post.postNo})}">살리거나 죽이기</a></td>
             </tr>
+            <tr>
+                <td colspan = "11">
+                    <a th:href = "@{/showPosts(page=${session.page - 1})}">< </a>
+                    <span th:text="${session.page}"></span>
+                    <a th:href = "@{/showPosts(page=${session.page + 1})}">< </a>
+                </td>
+            </tr>
         </table>
     </form>
     <br>

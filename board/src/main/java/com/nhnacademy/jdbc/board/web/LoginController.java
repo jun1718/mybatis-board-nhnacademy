@@ -30,7 +30,7 @@ public class LoginController {
         }
 
         model.addAttribute("id", session.getAttribute("id"));
-        return "redirect:/showPosts";
+        return "redirect:/showPosts?page=" + session.getAttribute("page");
     }
 
     @PostMapping("/login")
@@ -46,6 +46,7 @@ public class LoginController {
 
         HttpSession session = request.getSession(true);
         session.setAttribute("id", id);
+        session.setAttribute("page", 1);
         modelMap.put("id", id);
 
         return "redirect:/login";

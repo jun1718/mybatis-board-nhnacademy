@@ -14,9 +14,13 @@ public interface PostService {
 
     List<PostVoAboutList> getPostAll();
 
+    List<PostVoAboutList> getPostAll(int page);
+
     Long writePost(Post post);
 
     Long removePostOrViewPost(Long id);
 
     Long modifyPost(Long id,String title,String content);
+
+    int pagination(int page);
 }

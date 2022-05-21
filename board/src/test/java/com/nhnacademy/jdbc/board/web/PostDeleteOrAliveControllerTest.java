@@ -33,5 +33,16 @@ class PostDeleteOrAliveControllerTest {
                 .andExpect(view().name("redirect:/showPosts"));
 
         verify(postService,times(1)).removePostOrViewPost(any());
+
+        for (int i = 1; i <= 1000; i++) {
+            if (i % 2 == 0) {
+                System.out.printf("insert into Posts (post_no, post_no_above, user_no_writer, user_no_modifier, writed_at, modified_at, title, content, view_activate)\n" +
+                    "         values(%d,null,1,null,'2022-05-20 13:03:00',null,'관리자 게시물%d' , '관리자 게시물 내용%d',true);%n", i, i, i, i);
+            } else {
+                System.out.printf("insert into Posts (post_no, post_no_above, user_no_writer, user_no_modifier, writed_at, modified_at, title, content, view_activate)\n" +
+                    "         values(%d,null,2,null,'2022-05-20 13:03:00',null,'유저 게시물%d' , '유저 게시물 내용%d',true);%n", i, i, i, i);
+            }
+
+        }
     }
 }

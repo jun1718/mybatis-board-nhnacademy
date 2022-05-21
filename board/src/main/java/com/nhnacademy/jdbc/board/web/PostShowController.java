@@ -5,6 +5,8 @@ import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import java.util.List;
+import java.util.Objects;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +21,16 @@ public class PostShowController {
     }
 
     @GetMapping("/showPosts")
-    public ModelAndView getPosts() {
-        List<PostVoAboutList> posts = postService.getPostAll();
+    public ModelAndView getPosts(@RequestParam(value = "page", required = false) int page,
+                                 HttpSession session) {
+//        page = postService.pagination(page);
+        session.setAttribute("page", page);
+
+        List<PostVoAboutList> posts = postService.getPostAll(page);
+
         ModelAndView mav = new ModelAndView("showPostsForm");
         mav.addObject("posts", posts);
+        mav.addObject("page", page);
         return mav;
     }
 
