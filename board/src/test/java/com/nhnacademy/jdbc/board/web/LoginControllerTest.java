@@ -50,8 +50,8 @@ class LoginControllerTest {
     void getLoginWithSession() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/login")
                 .session(session))
-            .andExpect(status().isOk())
-            .andExpect(view().name("loginSuccess"))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/showPosts"))
             .andExpect(model().attribute("id", session.getAttribute("id")))
             .andReturn();
         String id = (String) mvcResult.getModelAndView().getModel().get("id");
@@ -66,8 +66,8 @@ class LoginControllerTest {
         mockMvc.perform(post("/login")
                 .param("id", "admin")
                 .param("pwd", "admin"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("loginSuccess"))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/login"))
             .andExpect(model().attribute("id", "admin"))
             .andReturn();
 
