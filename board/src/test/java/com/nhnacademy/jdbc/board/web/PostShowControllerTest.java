@@ -55,21 +55,21 @@ class PostShowControllerTest {
 
     @Test
     void getPost() throws Exception {
-//        PostVoAboutDetailUp postVoAboutDetailUp = new PostVoAboutDetailUp(1L,"test","test","ad","ㅁㅇ"
-//            ,null,"",null,null);
-//
-//        PostVoAboutDetailDown postVoAboutDetailDown = new PostVoAboutDetailDown("ad","ㅁㅇ","test");
-//
-//        when(service.getPostUp(1L)).thenReturn(Optional.of(postVoAboutDetailUp));
-//        when(service.getPostDown(1L)).thenReturn(List.of(postVoAboutDetailDown));
-//
-//        mockMvc.perform(get("/showPost")
-//                .param("id", String.valueOf(1L)))
-//            .andExpect(view().name("showPostForm"))
-//            .andExpect(model().attribute("postUp", postVoAboutDetailUp))
-//            .andExpect(model().attribute("postDown", List.of(postVoAboutDetailDown)));
-//
-//        verify(service, times(1)).getPostUp(any());
-//        verify(service, times(1)).getPostDown(any());
+        PostVoAboutDetailUp postVoAboutDetailUp = new PostVoAboutDetailUp(1L,"test","test","ad","ㅁㅇ"
+            ,null,"",null,null);
+
+        PostVoAboutDetailDown postVoAboutDetailDown = new PostVoAboutDetailDown("ad","ㅁㅇ","test");
+
+        when(service.getPostUp(1L)).thenReturn(Optional.of(postVoAboutDetailUp));
+        when(service.getPostDown(1L)).thenReturn(List.of(postVoAboutDetailDown));
+
+        mockMvc.perform(get("/showPost")
+                .param("id", String.valueOf(1L)))
+            .andExpect(view().name("showPostForm"))
+            .andExpect(model().attribute("postUp", postVoAboutDetailUp))
+            .andExpect(model().attribute("postDown", List.of(postVoAboutDetailDown)));
+
+        verify(service, times(1)).getPostUp(any());
+        verify(service, times(1)).getPostDown(any());
     }
 }

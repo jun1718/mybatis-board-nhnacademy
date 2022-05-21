@@ -29,7 +29,7 @@ public class PostModifyController {
     @PostMapping("/modify")
     public String doModify(@RequestParam("postNo") Long postNo,
                             @RequestParam("postTitle") String postTitle,
-                            @RequestParam("postContent") String postContent) {        System.out.println("=====================");
+                            @RequestParam("postContent") String postContent) {
 
         postService.modifyPost(postNo, postTitle, postContent);
         return "redirect:/showPosts";

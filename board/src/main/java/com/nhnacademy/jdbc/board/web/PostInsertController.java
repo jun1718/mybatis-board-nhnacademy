@@ -6,6 +6,7 @@ import com.nhnacademy.jdbc.board.user.domain.User;
 import com.nhnacademy.jdbc.board.user.service.UserService;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -39,14 +40,12 @@ public class PostInsertController {
 
         HttpSession session = request.getSession(false);
         String attribute = (String)session.getAttribute("id");
-        if(userService.getUserById(attribute).isEmpty()
-            || title.isEmpty()
-            || content.isEmpty()){
+        Optional<User> optionalUser = userService.getUserById(attribute);
+        if(optionalUser.isEmpty()){
             return "redirect:/insert";
         }
-        User user = userService.getUserById(attribute).get();
-        Long insertedResult = postService.writePost(new Post(
-            null, null, user.getUserNo(), null,
+       postService.writePost(new Post(
+            null, null, optionalUser.get().getUserNo(), null,
                 new Date(), null, title, content, true));
         return "redirect:/showPosts";
     }

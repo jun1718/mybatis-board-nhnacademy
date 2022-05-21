@@ -1,7 +1,7 @@
 package com.nhnacademy.jdbc.board.post.domain;
 
-import java.time.LocalDateTime;
 import java.util.Date;
+
 import lombok.Data;
 
 @Data
