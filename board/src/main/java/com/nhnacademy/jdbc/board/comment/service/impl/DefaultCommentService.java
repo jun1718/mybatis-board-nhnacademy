@@ -3,9 +3,12 @@ package com.nhnacademy.jdbc.board.comment.service.impl;
 import com.nhnacademy.jdbc.board.comment.domain.Comment;
 import com.nhnacademy.jdbc.board.comment.mapper.CommentMapper;
 import com.nhnacademy.jdbc.board.comment.service.CommentService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DefaultCommentService implements CommentService {
     private final CommentMapper commentMapper;
 

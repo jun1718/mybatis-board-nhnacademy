@@ -27,9 +27,9 @@ public class PostShowController {
     }
 
     @GetMapping("/showPost")
-    public ModelAndView getPost(@RequestParam("id") Long id) {
-        PostVoAboutDetailUp postUp = postService.getPostUp(id).orElse(null);
-        List<PostVoAboutDetailDown> postDown = postService.getPostDown(id);
+    public ModelAndView getPost(@RequestParam("postNo") Long postNo) {
+        PostVoAboutDetailUp postUp = postService.getPostUp(postNo).orElse(null);
+        List<PostVoAboutDetailDown> postDown = postService.getPostDown(postNo);
 
         ModelAndView mav = new ModelAndView("showPostForm");
         mav.addObject("postUp", postUp);

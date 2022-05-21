@@ -46,6 +46,7 @@
 <!--        <a th:href = "@{/modify(id=${postUp.postNo})}">수정</a>-->
         <a th:href = "@{/modify(postNo=${postUp.postNo})}">수정</a>
         <a th:href = "@{/deleteAndAlive(postNo=${postUp.postNo})}">삭제</a>
+        <a th:href = "@{/comment(postNo=${postUp.postNo},userId=${#session.getAttribute('id')})}">댓글쓰기</a>
         <a href = "/showPosts">목록으로가기</a>
     </span>
 </body>

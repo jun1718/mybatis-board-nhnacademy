@@ -8,4 +8,6 @@ public class Comment {
     private final Long postNo;
     private final Long userNo;
     private final String content;
+
+
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>commentInsertForm</title>
+</head>
+<body>
+    <form action ="/comment" method="post">
+        댓글내용 :
+        <input type = "text" name = "content">
+        <input type="hidden" name="postNo" th:value = "${postNo}"><br>
+        <input type="hidden" name="userNo" th:value = "${userNo}"><br>
+        <button type="submit">댓글쓰기</button>
+    </form>
+</body>
+</html>
