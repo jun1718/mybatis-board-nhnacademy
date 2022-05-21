@@ -4,11 +4,13 @@ import com.nhnacademy.jdbc.board.post.domain.Post;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import com.nhnacademy.jdbc.board.user.domain.User;
 import com.nhnacademy.jdbc.board.user.service.UserService;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,13 +41,13 @@ public class PostInsertController {
                            HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
-        String attribute = (String)session.getAttribute("id");
+        String attribute = (String) session.getAttribute("id");
         Optional<User> optionalUser = userService.getUserById(attribute);
-        if(optionalUser.isEmpty()){
+        if (optionalUser.isEmpty()) {
             return "redirect:/insert";
         }
-       postService.writePost(new Post(
-            null, null, optionalUser.get().getUserNo(), null,
+        postService.writePost(new Post(
+                null, null, optionalUser.get().getUserNo(), null,
                 new Date(), null, title, content, true));
         return "redirect:/showPosts";
     }
