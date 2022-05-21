@@ -57,8 +57,13 @@
         values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate})
     </insert>
     <update id="deleteOrAlive">
-        update Posts set view_activate = view_activate ^ 1
-        where post_no=#{postNo}
+
+update Posts set view_activate =
+    Case
+    when view_activate = 1 THEN 0
+        ELSE 1
+    END
+    where post_no=#{postNo}
     </update>
     <update id="updatePost">
         update Posts set title= #{title}, content=#{content}

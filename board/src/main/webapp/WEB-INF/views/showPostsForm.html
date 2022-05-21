@@ -40,8 +40,7 @@
                 <td th:text="${post.postWritedAt}"></td>
                 <td th:text="${post.viewCount}"></td>
                 <td><a th:href = "@{/showPost(id=${post.postNo})}">조회하러가기</a></td>
-                <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a href = "/delete">살리기</a></td>
-                <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a href = "/alive">죽이기</a></td>
+                <td th:if = "${#strings.equals(#session.getAttribute('id'), 'admin')}"><a th:href = "@{/deleteAndAlive(postNo=${post.postNo})}">살리거나 죽이기</a></td>
             </tr>
         </table>
     </form>

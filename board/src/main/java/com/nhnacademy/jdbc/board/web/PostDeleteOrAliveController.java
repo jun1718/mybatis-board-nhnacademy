@@ -14,9 +14,9 @@ public class PostDeleteOrAliveController {
         this.postService = postService;
     }
 
-    @GetMapping(value = {"/delete","/alive"})
+    @GetMapping("/deleteAndAlive")
     public ModelAndView delete(@RequestParam("postNo") Long postNo){
-        ModelAndView mav = new ModelAndView("redirect:showPosts");
+        ModelAndView mav = new ModelAndView("redirect:/showPosts");
         postService.removePostOrViewPost(postNo);
 
         return mav;
