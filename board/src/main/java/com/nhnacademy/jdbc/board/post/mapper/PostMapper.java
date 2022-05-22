@@ -30,4 +30,7 @@ public interface PostMapper {
 
     Long updatePost(@Param("postNo") Long postNo, @Param("title") String title, @Param("content") String content);
 
+    List<PostVoAboutList> getLikedAllOfAdmin(int limit, int offset);
+
+    List<PostVoAboutList> getLikedAllOfUser(int limit, int offset);
 }

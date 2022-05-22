@@ -3,15 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nhnacademy.jdbc.board.like.mapper.LikeMapper">
-    <select id="findLikePostNo" resultType="com.nhnacademy.jdbc.board.like.domain.Like">
+    <select id="findLikePostNo" resultType="com.nhnacademy.jdbc.board.like.domain.LikeViewCount">
         select * from LikesViewCounts
         where user_no =#{userNo}
     </select>
-    <select id="findAll" resultType="com.nhnacademy.jdbc.board.like.domain.Like">
-        select * from LikesViewCounts;
+    <select id="getCountLikeViewCount" resultType="Integer">
+        select count(*) from LikesViewCounts
+        where post_no = #{postNo} and part = #{part};
+    </select>
+
+    <select id = "getLikeViewCount" resultType = "com.nhnacademy.jdbc.board.like.domain.LikeViewCount">
+        select * from LikesViewCounts
+        where part = #{like.part} and post_no = #{like.postNo} and user_no = #{like.userNo}
     </select>
     <insert id="insertLike">
-        insert into LikesViewCounts(like_no,post_no,user_no)
-        values (#{likeNo},#{postNo},#{userNo});
+        insert into LikesViewCounts(part,post_no,user_no)
+        values (#{like.part},#{like.postNo},#{like.userNo});
     </insert>
+
+    <delete id = "deleteLikeViewCount">
+        delete from LikesViewCounts
+        where part = #{like.part} and post_no = #{like.postNo} and user_no = #{like.userNo}
+    </delete>
+
+    <select id = "getAllLikeViewCountByUserId" resultType="com.nhnacademy.jdbc.board.like.domain.LikeViewCount">
+        select * from LikesViewCounts
+        where user_no = #{userNo}
+    </select>
 </mapper>

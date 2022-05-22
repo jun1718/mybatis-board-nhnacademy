@@ -25,4 +25,6 @@ public interface PostService {
     Optional<Post> findFileName( Long postNo);
 
     int getTotalContent(String id);
+
+    List<PostVoAboutList> getLikedPostAll(String id, int page);
 }

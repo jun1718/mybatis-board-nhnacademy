@@ -23,8 +23,8 @@
         where id = #{id} and pwd = #{pwd}
     </select>
     <insert id="insertUser">
-        insert into Users(id,userId,user_pwd,nickname)
-        values (#{id},'${username}','${user_pwd}','${nickname}')
+        insert into Users(user_no, id, pwd,nickname)
+        values (#{user.userNo},#{user.id},#{user.pwd},#{user.nickname})
     </insert>
     <update id="updateUser">
         update Users set nickname = '${nickName}'

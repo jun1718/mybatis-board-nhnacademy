@@ -58,6 +58,7 @@
     </form>
     <br>
     <a href = "/insert">글등록</a>
-    <a href = "/logout">로그아웃</a>
+    <a href = "/logout">로그아웃</a> <br>
+    <a th:href = "@{/showLikedPosts(postNo=${post.postNo}, page=1)}">내가 좋아요 한 게시글만 보기</a>
 </body>
 </html>

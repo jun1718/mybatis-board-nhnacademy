@@ -15,7 +15,7 @@ public interface UserMapper {
 
     Long deleteUser(@Param("userNo") Long userNo);
 
-    Long insertUser(User user);
+    Long insertUser(@Param("user") User user);
 
     Long updateUser(@Param("nickName") String nickName,@Param("userNo") Long userNo);
 

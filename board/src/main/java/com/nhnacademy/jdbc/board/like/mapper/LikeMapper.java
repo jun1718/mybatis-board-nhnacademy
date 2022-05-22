@@ -1,20 +1,23 @@
 package com.nhnacademy.jdbc.board.like.mapper;
 
-import com.nhnacademy.jdbc.board.comment.domain.Comment;
-import com.nhnacademy.jdbc.board.like.domain.Like;
+import com.nhnacademy.jdbc.board.like.domain.LikeViewCount;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper
 public interface LikeMapper {
 
-    List<Like> findLikePostNo(@Param("userNo") Long userNo);
+    List<LikeViewCount> findLikePostNo(@Param("userNo") Long userNo);
 
-    List<Like> findAll();
+    Integer getCountLikeViewCount(@Param("postNo") Long postNo, @Param("part") String part);
 
-    Long insertLike(Like like);
+    Long insertLike(@Param("like") LikeViewCount like);
 
+    LikeViewCount getLikeViewCount(@Param("like") LikeViewCount like);
+
+    void deleteLikeViewCount(@Param("like") LikeViewCount like);
+
+    List<LikeViewCount> getAllLikeViewCountByUserId(@Param("userNo") Long userNo);
 }

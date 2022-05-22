@@ -40,6 +40,16 @@ public class DefaultPostService implements PostService {
         else return postMapper.findAllOfUser(limit, offset);
     }
 
+    @Override
+    public List<PostVoAboutList> getLikedPostAll(String id, int page) {
+        int limit = 20;
+        int offset = --page * limit;
+
+        if (id.equals("admin")) return postMapper.getLikedAllOfAdmin(limit, offset);
+        else return postMapper.getLikedAllOfUser(limit, offset);
+    }
+
+    @Override
     public int getTotalContent(String id) {
         int totalContent = 0;
         if (id.equals("admin")) totalContent = postMapper.getTotalContentOfAdmin();

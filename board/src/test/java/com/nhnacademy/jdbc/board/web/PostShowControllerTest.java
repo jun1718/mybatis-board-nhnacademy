@@ -10,11 +10,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.nhnacademy.jdbc.board.like.service.LikeViewCountService;
+import com.nhnacademy.jdbc.board.like.service.impl.DefaultLikeViewCountService;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailDown;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import com.nhnacademy.jdbc.board.post.service.impl.DefaultPostService;
+import com.nhnacademy.jdbc.board.user.service.UserService;
+import com.nhnacademy.jdbc.board.user.service.impl.DefaultUserService;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,18 +26,23 @@ import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.GetMapping;
 
 class PostShowControllerTest {
     MockMvc mockMvc;
     PostService service;
+    LikeViewCountService likeViewCountService;
+    UserService userService;
     MockHttpSession session;
 
 
     @BeforeEach
     void setUp() {
         service = mock(DefaultPostService.class);
+        likeViewCountService = mock(DefaultLikeViewCountService.class);
+        userService = mock(DefaultUserService.class);
         session = new MockHttpSession();
-        PostShowController controller = new PostShowController(service);
+        PostShowController controller = new PostShowController(service, likeViewCountService, userService);
         session.setAttribute("id", "admin");
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
@@ -72,4 +81,7 @@ class PostShowControllerTest {
         verify(service, times(1)).getPostUp(any());
         verify(service, times(1)).getPostDown(any());
     }
+
+
+
 }

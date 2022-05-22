@@ -52,6 +52,7 @@
                             on p.user_no_writer = wr.user_no
                  Left join Users as mo
                            on p.user_no_modifier = mo.user_no
+                where user_no = ${userNo}
         order by p.post_no desc
             limit ${limit} offset ${offset};
     </select>
@@ -109,5 +110,28 @@ update Posts set view_activate =
         update Posts set title= #{title}, content=#{content}
         where post_no = #{postNo}
     </update>
+
+    <select id="getLikedAllOfAdmin" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutList">
+        select p.post_no as 'postNo',
+                p.title as 'postTitle',
+                wr.id as 'writerId',
+                wr.nickname as 'writerNickname',
+                ifnull(mo.id,'') as 'modifierId',
+                ifnull(mo.nickname,'') as 'modifierNickname',
+                p.writed_at as 'postWritedAt',
+                (
+                    select count(*)
+                    from Comments as c
+                    where p.post_no = c.post_no
+                    ) as 'viewCount',
+                p.view_activate as 'viewActivate'
+        from (select * from Posts where view_activate=1) as p
+                 inner join Users as wr
+                            on p.user_no_writer = wr.user_no
+                 Left join Users as mo
+                           on p.user_no_modifier = mo.user_no
+        order by p.post_no desc
+            limit ${limit} offset ${offset};
+    </select>
 
 </mapper>

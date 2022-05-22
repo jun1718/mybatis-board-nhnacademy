@@ -3,16 +3,12 @@
 	board.iml,4\d\4dd4a3ea0db188e3f87f303638ad95b4a50229dc
 a
 1src/main/java/com/nhnacademy/jdbc/board/Base.java,7\b\7bf5ad3f9cb5d18230ebab53db53665390945c75
-w
-Gsrc/main/java/com/nhnacademy/jdbc/board/user/mapper/maps/UserMapper.xml,9\d\9d2e4e20539aab80537fe7e1fb7b562cc618c784
 _
 /src/main/webapp/WEB-INF/views/loginSuccess.html,8\d\8d388306130f9bf9ce69cbd1542e0b312a11bd44
 \
 ,src/main/webapp/WEB-INF/views/loginForm.html,9\d\9df7399dedac7c7e42d96951a0877b5c91654754
 |
 Lsrc/main/java/com/nhnacademy/jdbc/board/web/PostDeleteOrAliveController.java,a\a\aa4c618c716a582da08a708df8c262f0145d4fb0
-p
-@src/main/java/com/nhnacademy/jdbc/board/web/LoginController.java,3\1\31050655455b3c833f96a44d3969033d5186f708
 €
 Psrc/test/java/com/nhnacademy/jdbc/board/web/PostDeleteOrAliveControllerTest.java,e\a\eac16f7a0761402280d2b425aacdd6f967cfaa1e
 y
