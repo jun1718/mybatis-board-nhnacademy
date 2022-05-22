@@ -51,7 +51,7 @@ class LoginControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/login")
                 .session(session))
             .andExpect(status().is3xxRedirection())
-            .andExpect(view().name("redirect:/showPosts"))
+            .andExpect(view().name("redirect:/showPosts?page="+null))
             .andExpect(model().attribute("id", session.getAttribute("id")))
             .andReturn();
         String id = (String) mvcResult.getModelAndView().getModel().get("id");

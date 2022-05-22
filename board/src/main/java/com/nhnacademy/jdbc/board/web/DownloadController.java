@@ -1,5 +1,6 @@
 package com.nhnacademy.jdbc.board.web;
 
+import com.nhnacademy.jdbc.board.exception.DownLoadFailException;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class DownloadController {
 //                os.write(su);
 //            }
         } catch (IOException ex) {
+            throw new DownLoadFailException();
         }
     }
 //    @GetMapping("/download")

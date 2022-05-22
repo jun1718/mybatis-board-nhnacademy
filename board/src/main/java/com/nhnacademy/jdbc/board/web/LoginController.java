@@ -1,14 +1,19 @@
 package com.nhnacademy.jdbc.board.web;
 
 
+import com.nhnacademy.jdbc.board.exception.ValidationFailedException;
 import com.nhnacademy.jdbc.board.user.service.UserService;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,12 +39,11 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String doLogin(@RequestParam("id") String id,
+    public String doLogin( @RequestParam("id") String id,
                           @RequestParam("pwd") String pwd,
                           HttpServletRequest request,
                           HttpServletResponse response,
                           ModelMap modelMap) {
-
         if (userLoginService.checkUser(id, pwd).isEmpty()) {
             return "redirect:/login";
         }

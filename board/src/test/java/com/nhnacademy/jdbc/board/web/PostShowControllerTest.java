@@ -15,6 +15,7 @@ import com.nhnacademy.jdbc.board.like.service.impl.DefaultLikeViewCountService;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailDown;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
+import com.nhnacademy.jdbc.board.post.service.Pagination;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import com.nhnacademy.jdbc.board.post.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.user.service.UserService;
@@ -51,15 +52,27 @@ class PostShowControllerTest {
     void getPosts() throws Exception {
         PostVoAboutList list = new PostVoAboutList(1L, "a", "af", "b", null, null,
             null, 0L, 1);
+        MockHttpSession session = new MockHttpSession();
+        Pagination pagination = mock(Pagination.class);
+        when(service.getTotalContent(any())).thenReturn(1);
+        when(pagination.getNowPage()).thenReturn(1);
+        when(pagination.getEndPage()).thenReturn(2);
+        when(service.getPostAll(null,1)).thenReturn(List.of(list));
 
-        when(service.getPostAll("admin", 1)).thenReturn(List.of(list));
-        mockMvc.perform(get("/showPosts"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("showPostsForm"))
-            .andExpect(model().attributeExists("posts"))
-            .andExpect(model().attribute("posts", List.of(list)));
+        String id = (String)session.getAttribute("id");
 
-        verify(service, times(1)).getPostAll("admin", 1);
+        session.setAttribute("page", pagination.getNowPage());
+        session.setAttribute("endPage", pagination.getEndPage());
+
+        mockMvc.perform(get("/showPosts")
+                        .param("page", String.valueOf(10))
+                        .session(session))
+                .andExpect(status().isOk())
+                .andExpect(view().name("showPostsForm"))
+                .andExpect(model().attributeExists("posts"))
+                .andExpect(model().attribute("posts", List.of(list)));
+
+        verify(service, times(1)).getPostAll(null, 1);
     }
 
     @Test
@@ -73,7 +86,7 @@ class PostShowControllerTest {
         when(service.getPostDown(1L)).thenReturn(List.of(postVoAboutDetailDown));
 
         mockMvc.perform(get("/showPost")
-                .param("id", String.valueOf(1L)))
+                .param("postNo", String.valueOf(1L)))
             .andExpect(view().name("showPostForm"))
             .andExpect(model().attribute("postUp", postVoAboutDetailUp))
             .andExpect(model().attribute("postDown", List.of(postVoAboutDetailDown)));
