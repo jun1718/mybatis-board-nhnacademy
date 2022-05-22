@@ -13,8 +13,6 @@ _
 Lsrc/main/java/com/nhnacademy/jdbc/board/web/PostDeleteOrAliveController.java,a\a\aa4c618c716a582da08a708df8c262f0145d4fb0
 p
 @src/main/java/com/nhnacademy/jdbc/board/web/LoginController.java,3\1\31050655455b3c833f96a44d3969033d5186f708
-y
-Isrc/test/java/com/nhnacademy/jdbc/board/web/PostModifyControllerTest.java,4\1\41639e80baa519504278e1438569d09c1f5dd652
 €
 Psrc/test/java/com/nhnacademy/jdbc/board/web/PostDeleteOrAliveControllerTest.java,e\a\eac16f7a0761402280d2b425aacdd6f967cfaa1e
 y

@@ -34,10 +34,10 @@ public class PostInsertController {
 
     @GetMapping(value = {"/insert", "/insertReply"})
     public ModelAndView insert(HttpServletRequest request,
-                               @RequestParam(value = "postNoAbove", required = false)
+                               @RequestParam(value = "postNo", required = false)
                                    Long postNoAbove) {
         ModelAndView mav = new ModelAndView("showInsertForm");
-        ModelAndView failMav = new ModelAndView("/showPost?postNo=" + postNoAbove);
+        ModelAndView failMav = new ModelAndView("redirect:/showPost?postNo=" + postNoAbove);
 
         if (request.getRequestURI().equals("/insert")) {
             mav.addObject("isReply", false);
@@ -46,8 +46,10 @@ public class PostInsertController {
         mav.addObject("postNoAbove", postNoAbove);
 
         int n = 1;
-        while (n < 5) {
+        Long postNo = -1L;
+        while (n < 6) {
             Optional<PostVoAboutDetailUp> postUp = postService.getPostUp(postNoAbove);
+            if (n == 1) postNo = postUp.get().getPostNo();
             Optional<Long> postNoAboveReOp = Optional.ofNullable(postUp.get().getPostNoAbove());
             postNoAbove = postNoAboveReOp.orElse(0L);
 
@@ -57,9 +59,17 @@ public class PostInsertController {
             n++;
         }
 
-        if (n >= 5) {
+        if (n >= 6) {
             return failMav;
         }
+        // TODO: StringBuilder로 변경, 이름변경(표현력)
+        String str = "";
+        for (int i = 0; i < n; i++) {
+            str += "  ";
+        }
+        str += "RE(" + postNo + "번 게시글의 답글) : ";
+
+        mav.addObject("RE", str);
 
         mav.addObject("isReply", true);
         return mav;
@@ -90,6 +100,7 @@ public class PostInsertController {
                                 @RequestParam("content") String content,
                                 @RequestParam("file") MultipartFile file,
                                 @RequestParam("postNoAbove") Long postNoAbove,
+                                @RequestParam("RE") String re,
                                 HttpServletRequest request) throws IOException {
         if (!file.isEmpty()) {
             file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
@@ -102,10 +113,10 @@ public class PostInsertController {
             return "redirect:/insert";
         }
 
-
+        re += title;
         postService.writePost(new Post(
             null, postNoAbove, optionalUser.get().getUserNo(), null,
-            new Date(), null, title, content, true));
+            new Date(), null, re, content, true));
         return "redirect:/showPost?postNo=" + postNoAbove;
     }
 }

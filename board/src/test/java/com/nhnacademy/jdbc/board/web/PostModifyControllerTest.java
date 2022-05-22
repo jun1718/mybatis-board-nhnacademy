@@ -29,7 +29,7 @@ class PostModifyControllerTest {
     @Test
     void postModifyControllerGetTest() throws Exception {
         PostVoAboutDetailUp postVoAboutDetailUp =
-                new PostVoAboutDetailUp(1L, "", "", "", "", "", "", null,null);
+                new PostVoAboutDetailUp(1L, "", "", "", "", "", "", null,null, null);
         when(postService.getPostUp(any())).thenReturn(Optional.of(postVoAboutDetailUp));
 
         mockMvc.perform(get("/modify")

@@ -56,7 +56,7 @@ class PostShowControllerTest {
     @Test
     void getPost() throws Exception {
         PostVoAboutDetailUp postVoAboutDetailUp = new PostVoAboutDetailUp(1L,"test","test","ad","ㅁㅇ"
-            ,null,"",null,null);
+            ,null,"",null,null, null);
 
         PostVoAboutDetailDown postVoAboutDetailDown = new PostVoAboutDetailDown("ad","ㅁㅇ","test");
 

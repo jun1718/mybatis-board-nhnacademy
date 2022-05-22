@@ -15,6 +15,7 @@
 
 <form th:if = "${isReply}" action = "/insertReply" method="post" enctype="multipart/form-data">
     <input type="hidden" name = "postNoAbove" th:value = "${postNoAbove}">
+    <input type="hidden" name = "RE" th:value = "${RE}">
     제목 : <input type = "text" name = "title">
     내용 : <input type = "text" name = "content">
     <input type="file" name="file">
