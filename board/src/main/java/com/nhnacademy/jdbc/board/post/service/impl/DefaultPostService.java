@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
 
@@ -38,25 +37,28 @@ public class DefaultPostService implements PostService {
 
     @Override
     public List<PostVoAboutList> getPostAll(int page) {
-        page -= 1;
         int limit = 20;
-        int offset = --page;
+        page--;
+        int offset = page * limit;
 
         return postMapper.findAll(limit, offset);
     }
 
     @Override
+    @Transactional
     public Long writePost(Post post) {
         return postMapper.insertPost(post);
     }
 
     @Override
+    @Transactional
     public Long removePostOrViewPost(Long id) {
         return postMapper.deleteOrAlive(id);
     }
 
 
     @Override
+    @Transactional
     public Long modifyPost(Long postNo, String title, String content) {
         return postMapper.updatePost(postNo, title, content);
     }
@@ -67,6 +69,7 @@ public class DefaultPostService implements PostService {
 
         int displayNum = 20;
         int totalContent = getTotalContent();
+
         int endPage = 0;
         if (totalContent % displayNum == 0) {
             endPage = totalContent / displayNum;

@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.config;
 
 import com.p6spy.engine.spy.P6DataSource;
+import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -33,7 +34,9 @@ public class MybatisConfig {
     }
 
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {
+    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException, SQLException {
+//        logDataSource().getConnection().setAutoCommit(true);
+
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(logDataSource());
