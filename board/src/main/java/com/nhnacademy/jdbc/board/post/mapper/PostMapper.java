@@ -17,7 +17,11 @@ public interface PostMapper {
 
     List<PostVoAboutDetailDown> findByIdDown(@Param("postNo") Long postNo);
 
-    List<PostVoAboutList> findAll(@Param("limit") int limit, @Param("offset") int offset);
+    List<PostVoAboutList> findAllOfAdmin(@Param("limit") int limit, @Param("offset") int offset);
+    int getTotalContentOfAdmin();
+    List<PostVoAboutList> findAllOfUser(@Param("limit") int limit, @Param("offset") int offset);
+    int getTotalContentOfUser();
+
 
     Long insertPost(@Param("post") Post post);
 
@@ -25,5 +29,5 @@ public interface PostMapper {
 
     Long updatePost(@Param("postNo") Long postNo, @Param("title") String title, @Param("content") String content);
 
-    int getTotalContent();
+
 }

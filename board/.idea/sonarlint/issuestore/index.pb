@@ -4,8 +4,6 @@
 a
 1src/main/java/com/nhnacademy/jdbc/board/Base.java,7\b\7bf5ad3f9cb5d18230ebab53db53665390945c75
 w
-Gsrc/test/java/com/nhnacademy/jdbc/board/web/PostShowControllerTest.java,e\e\eedc0944c4e26fee589671339f9ff14a8a8142d3
-w
 Gsrc/main/java/com/nhnacademy/jdbc/board/user/mapper/maps/UserMapper.xml,9\d\9d2e4e20539aab80537fe7e1fb7b562cc618c784
 _
 /src/main/webapp/WEB-INF/views/loginSuccess.html,8\d\8d388306130f9bf9ce69cbd1542e0b312a11bd44
