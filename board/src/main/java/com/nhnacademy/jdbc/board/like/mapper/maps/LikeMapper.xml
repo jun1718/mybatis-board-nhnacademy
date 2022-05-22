@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nhnacademy.jdbc.board.like.mapper.LikeMapper">
+    <select id="findLikePostNo" resultType="com.nhnacademy.jdbc.board.like.domain.Like">
+        select * from LikesViewCounts
+        where user_no =#{userNo}
+    </select>
+    <select id="findAll" resultType="com.nhnacademy.jdbc.board.like.domain.Like">
+        select * from LikesViewCounts;
+    </select>
+    <insert id="insertLike">
+        insert into LikesViewCounts(like_no,post_no,user_no)
+        values (#{likeNo},#{postNo},#{userNo});
+    </insert>
+    <delete id="deleteLike">
+        delete from LikesViewCounts
+        where like_no = #{likeNo};
+    </delete>
+</mapper>

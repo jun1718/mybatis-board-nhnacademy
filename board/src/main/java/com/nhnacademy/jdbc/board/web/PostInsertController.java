@@ -5,11 +5,9 @@ import com.nhnacademy.jdbc.board.post.service.PostService;
 import com.nhnacademy.jdbc.board.user.domain.User;
 import com.nhnacademy.jdbc.board.user.service.UserService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,13 +36,15 @@ public class PostInsertController {
     public String insert() {
         return "showInsertForm";
     }
+
     @PostMapping("/insert")
     public String doInsert(@RequestParam("title") String title,
                            @RequestParam("content") String content,
                            @RequestParam("file") MultipartFile file,
                            HttpServletRequest request) throws IOException {
-
-        file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+        if(!file.isEmpty()){
+            file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+        }
         HttpSession session = request.getSession(false);
         String attribute = (String) session.getAttribute("id");
         Optional<User> optionalUser = userService.getUserById(attribute);

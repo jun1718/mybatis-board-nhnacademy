@@ -1,7 +1,9 @@
 package com.nhnacademy.jdbc.board.config;
 
+import com.nhnacademy.jdbc.board.filter.XssServletFilter;
 import com.nhnacademy.jdbc.board.interceptor.LoginCheckInterceptor;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
@@ -25,7 +27,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "com.nhnacademy.jdbc.board", useDefaultFilters = false,
-    includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,classes ={Controller.class}))
+        includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class}))
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, MessageSourceAware {
     private ApplicationContext applicationContext;
     private MessageSource messageSource;
@@ -45,6 +47,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
         registry.addInterceptor(new LoginCheckInterceptor());
     }
 
+    //upload 시 필요할지 몰라서 주석처리
 //    @Override
 //    public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("/upload")
@@ -56,7 +59,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
     }
 
     @Bean
-    public MultipartResolver multipartResolver(){
+    public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(-1);
 
@@ -65,7 +68,20 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
     }
 
     @Bean
-    public ViewResolver thymeleafViewResolver(){
+    public FilterRegistrationBean getFilterRegistrationBean() {
+
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+
+
+        registrationBean.setOrder(1);
+
+        registrationBean.addUrlPatterns("/*");
+
+        return registrationBean;
+    }
+
+    @Bean
+    public ViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
         thymeleafViewResolver.setCharacterEncoding("UTF-8");
@@ -73,14 +89,14 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
         return thymeleafViewResolver;
     }
 
-    public SpringTemplateEngine templateEngine(){
+    public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setTemplateEngineMessageSource(messageSource);
         return templateEngine;
     }
 
-    public SpringResourceTemplateResolver templateResolver(){
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setCharacterEncoding("UTF-8");
@@ -91,7 +107,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
     }
 
     @Bean
-    RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
+    RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
         RequestMappingHandlerAdapter requestMappingHandlerAdapter = new RequestMappingHandlerAdapter();
         requestMappingHandlerAdapter.setIgnoreDefaultModelOnRedirect(true);
         return requestMappingHandlerAdapter;
