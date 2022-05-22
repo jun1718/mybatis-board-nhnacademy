@@ -3,7 +3,6 @@ package com.nhnacademy.jdbc.board.config;
 import com.nhnacademy.jdbc.board.filter.XssServletFilter;
 import com.nhnacademy.jdbc.board.interceptor.LoginCheckInterceptor;
 import org.springframework.beans.BeansException;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
@@ -65,19 +64,6 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
 
         return multipartResolver;
 
-    }
-
-    @Bean
-    public FilterRegistrationBean getFilterRegistrationBean() {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-
-
-        registrationBean.setOrder(1);
-
-        registrationBean.addUrlPatterns("/*");
-
-        return registrationBean;
     }
 
     @Bean
