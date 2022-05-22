@@ -7,15 +7,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Controller
 public class DownloadController {
-    private static final String UPLOAD_DIR = "C:/file/tmp/";
+    private static final String UPLOAD_DIR = "D:/file";
     private final PostService postService;
 
     public DownloadController(PostService postService) {
@@ -23,26 +21,56 @@ public class DownloadController {
     }
 
     @GetMapping("/download")
-    public ModelAndView download(@RequestParam("postNo") Long postNo,
+    public void download(@RequestParam("postNo") Long postNo,
                                  HttpServletResponse response){
         ModelAndView mav = new ModelAndView("redirect:showPost?="+postNo);
         String fileName = postService.findFileName(postNo).get().getFileName();
-        String filePath = UPLOAD_DIR + fileName;
+        String filePath = UPLOAD_DIR + File.separator + "test.txt";
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=" + "test.txt");
 
-        try (InputStream is = Files.newInputStream(Paths.get(filePath));
+//        response.setHeader("Content-Disposition", "attachment; filename=\"" + "test.txt" + "\"");
+
+        File file = new File(filePath);
+        try (InputStream is = new FileInputStream(file);
              OutputStream os = response.getOutputStream()) {
+
+            int su = -1;
             byte[] buffer = new byte[4096];
 
-            int n;
-            while (-1 != (n = is.read(buffer))) {
-                os.write(buffer, 0, n);
+            while (-1 != (su = is.read(buffer))) {
+                os.write(su);
+
             }
+//            while (-1 != (n = is.read(buffer))) {
+//                os.write(buffer, 0, n);
+//                os.write(su);
+//            }
         } catch (IOException ex) {
         }
-
-        return mav;
     }
+//    @GetMapping("/download")
+//    public ModelAndView download(@RequestParam("postNo") Long postNo,
+//                                 HttpServletResponse response){
+//        ModelAndView mav = new ModelAndView("redirect:showPost?="+postNo);
+//        String fileName = postService.findFileName(postNo).get().getFileName();
+//        String filePath = UPLOAD_DIR + fileName;
+//
+//        response.setContentType("application/octet-stream");
+//        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+//
+//        try (InputStream is = Files.newInputStream(Paths.get(filePath));
+//             OutputStream os = response.getOutputStream()) {
+//            byte[] buffer = new byte[4096];
+//
+//            int n;
+//            while (-1 != (n = is.read(buffer))) {
+//                os.write(buffer, 0, n);
+//            }
+//        } catch (IOException ex) {
+//        }
+//
+//        return mav;
+//    }
 }

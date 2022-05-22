@@ -14,8 +14,7 @@
 <body>
     <p>
         <h1 th:text ="${postUp.fileName}"></h1><br>
-    <a href="pp.png" download>파일 다운로드 #</a>
-    <a href="/download?fileName=pp.png">fileDownload</a>
+
     <span th:unless="${postUp.fileName} ==''">
         <a th:href="@{/download(postNo=${postUp.postNo})}">파일 다운로드</a>
     </span>

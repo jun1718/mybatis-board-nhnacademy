@@ -91,7 +91,7 @@ public class PostInsertController {
         }
         postService.writePost(new Post(
             null, null, optionalUser.get().getUserNo(), null,
-            new Date(), null, title, content, true));
+            new Date(), null, title, content, true, file.getOriginalFilename()));
         return "redirect:/showPosts?page=" + request.getSession().getAttribute("page");
     }
 
@@ -116,7 +116,7 @@ public class PostInsertController {
         re += title;
         postService.writePost(new Post(
             null, postNoAbove, optionalUser.get().getUserNo(), null,
-            new Date(), null, re, content, true));
+            new Date(), null, re, content, true,file.getOriginalFilename()));
         return "redirect:/showPost?postNo=" + postNoAbove;
     }
 }
