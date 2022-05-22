@@ -20,5 +20,5 @@ public interface PostService {
 
     Long modifyPost(Long id,String title,String content);
 
-    int pagination(String id, int page);
+    int getTotalContent(String id);
 }

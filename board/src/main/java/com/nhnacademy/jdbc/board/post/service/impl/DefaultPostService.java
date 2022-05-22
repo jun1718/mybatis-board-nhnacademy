@@ -5,6 +5,7 @@ import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailDown;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutList;
 import com.nhnacademy.jdbc.board.post.mapper.PostMapper;
+import com.nhnacademy.jdbc.board.post.service.Pagination;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import java.util.List;
 import java.util.Objects;
@@ -33,11 +34,18 @@ public class DefaultPostService implements PostService {
     @Override
     public List<PostVoAboutList> getPostAll(String id, int page) {
         int limit = 20;
-        page--;
-        int offset = page * limit;
+        int offset = --page * limit;
 
         if (id.equals("admin")) return postMapper.findAllOfAdmin(limit, offset);
         else return postMapper.findAllOfUser(limit, offset);
+    }
+
+    public int getTotalContent(String id) {
+        int totalContent = 0;
+        if (id.equals("admin")) totalContent = postMapper.getTotalContentOfAdmin();
+        else totalContent = postMapper.getTotalContentOfUser();
+
+        return totalContent;
     }
 
     @Override
@@ -57,32 +65,5 @@ public class DefaultPostService implements PostService {
     @Transactional
     public Long modifyPost(Long postNo, String title, String content) {
         return postMapper.updatePost(postNo, title, content);
-    }
-
-    @Override
-    public int pagination(String id, int page) {
-        if (Objects.isNull(page) || page <= 1) return 1;
-
-        int displayNum = 20;
-
-        int totalContent = getTotalContent(id);
-
-        int endPage = 0;
-        if (totalContent % displayNum == 0) {
-            endPage = totalContent / displayNum;
-        } else {
-            endPage = totalContent / displayNum + 1;
-        }
-
-        if (page > endPage) page = endPage;
-        return page;
-    }
-
-    private int getTotalContent(String id) {
-        int totalContent = 0;
-        if (id.equals("admin")) totalContent = postMapper.getTotalContentOfAdmin();
-        else totalContent = postMapper.getTotalContentOfUser();
-
-        return totalContent;
     }
 }
