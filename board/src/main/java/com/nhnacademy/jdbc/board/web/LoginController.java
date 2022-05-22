@@ -39,7 +39,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String doLogin( @RequestParam("id") String id,
+    public String doLogin(@RequestParam("id") String id,
                           @RequestParam("pwd") String pwd,
                           HttpServletRequest request,
                           HttpServletResponse response,
