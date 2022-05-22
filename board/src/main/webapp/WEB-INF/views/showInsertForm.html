@@ -5,7 +5,16 @@
     <title>showInsertForm</title>
 </head>
 <body>
-<form action = "/insert" method="post" enctype="multipart/form-data">
+<!--<form action = "/insert" method="post" enctype="multipart/form-data">-->
+<form th:if = "${!isReply}" action = "/insert" method="post" enctype="multipart/form-data">
+    제목 : <input type = "text" name = "title">
+    내용 : <input type = "text" name = "content">
+    <input type="file" name="file">
+    <input type="submit" value="게시글등록">
+</form>
+
+<form th:if = "${isReply}" action = "/insertReply" method="post" enctype="multipart/form-data">
+    <input type="hidden" name = "postNoAbove" th:value = "${postNoAbove}">
     제목 : <input type = "text" name = "title">
     내용 : <input type = "text" name = "content">
     <input type="file" name="file">

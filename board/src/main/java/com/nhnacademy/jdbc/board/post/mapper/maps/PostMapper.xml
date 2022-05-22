@@ -12,7 +12,8 @@
                 ifnull(mo.id,"") as `modifierId`,
                 ifnull(mo.nickname,"") as `modifierNickname`,
                 p.writed_at as `postWritedAt`,
-                p.modified_at as `postModifiedAt`
+                p.modified_at as `postModifiedAt`,
+                p.post_no_above as 'postNoAbove'
         from Posts as p
                  inner join Users as wr
                             on p.user_no_writer = wr.user_no

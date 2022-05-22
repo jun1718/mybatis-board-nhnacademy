@@ -29,5 +29,4 @@ public interface PostMapper {
 
     Long updatePost(@Param("postNo") Long postNo, @Param("title") String title, @Param("content") String content);
 
-
 }

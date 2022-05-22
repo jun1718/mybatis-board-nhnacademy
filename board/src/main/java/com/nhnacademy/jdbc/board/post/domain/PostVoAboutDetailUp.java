@@ -1,9 +1,12 @@
 package com.nhnacademy.jdbc.board.post.domain;
 
 import java.util.Date;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Value;
 
-@Data
+@AllArgsConstructor
+@Getter
 public class PostVoAboutDetailUp {
     private final Long postNo;
     private final String postTitle;
@@ -14,4 +17,5 @@ public class PostVoAboutDetailUp {
     private final String modifierNickname;
     private final Date postWritedAt;
     private final Date postModifiedAt;
+    private final Long postNoAbove;
 }
