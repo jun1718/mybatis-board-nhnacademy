@@ -31,7 +31,33 @@
         where c.post_no = ${postNo}
     </select>
 
-    <select id="findAll" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutList">
+    <select id="findAllOfAdmin" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutList">
+        select p.post_no as 'postNo',
+                p.title as 'postTitle',
+                wr.id as 'writerId',
+                wr.nickname as 'writerNickname',
+                ifnull(mo.id,'') as 'modifierId',
+                ifnull(mo.nickname,'') as 'modifierNickname',
+                p.writed_at as 'postWritedAt',
+                (
+                    select count(*)
+                    from Comments as c
+                    where p.post_no = c.post_no
+                    ) as 'viewCount',
+                p.view_activate as 'viewActivate'
+        from Posts as p
+                 inner join Users as wr
+                            on p.user_no_writer = wr.user_no
+                 Left join Users as mo
+                           on p.user_no_modifier = mo.user_no
+        order by p.post_no desc
+            limit ${limit} offset ${offset};
+    </select>
+    <select id = "getTotalContentOfAdmin" resultType = "Integer">
+        select count(*)
+            from Posts;
+    </select>
+    <select id="findAllOfUser" resultType="com.nhnacademy.jdbc.board.post.domain.PostVoAboutList">
         select p.post_no as 'postNo',
                 p.title as 'postTitle',
                 wr.id as 'writerId',
@@ -47,17 +73,21 @@
                 p.view_activate as 'viewActivate'
         from (select * from Posts where view_activate=1) as p
                  inner join Users as wr
-                            on p.user_no_writer = wr.user_no
-                 Left join Users as mo
-                           on p.user_no_modifier = mo.user_no
+        on p.user_no_writer = wr.user_no
+            Left join Users as mo
+            on p.user_no_modifier = mo.user_no
         order by p.post_no desc
             limit ${limit} offset ${offset};
     </select>
-    <select id = "getTotalContent" resultType = "Integer">
+    <select id = "getTotalContentOfUser" resultType = "Integer">
         select count(*)
-            from Posts
-            where view_activate = 1;
+        from Posts
+        where view_activate = 1;
     </select>
+
+
+
+
     <insert id="insertPost">
         insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
         values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate})

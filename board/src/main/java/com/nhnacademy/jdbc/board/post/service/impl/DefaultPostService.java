@@ -31,17 +31,13 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<PostVoAboutList> getPostAll() {
-        return null;
-    }
-
-    @Override
-    public List<PostVoAboutList> getPostAll(int page) {
+    public List<PostVoAboutList> getPostAll(String id, int page) {
         int limit = 20;
         page--;
         int offset = page * limit;
 
-        return postMapper.findAll(limit, offset);
+        if (id.equals("admin")) return postMapper.findAllOfAdmin(limit, offset);
+        else return postMapper.findAllOfUser(limit, offset);
     }
 
     @Override
@@ -64,11 +60,12 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public int pagination(int page) {
+    public int pagination(String id, int page) {
         if (Objects.isNull(page) || page <= 1) return 1;
 
         int displayNum = 20;
-        int totalContent = getTotalContent();
+
+        int totalContent = getTotalContent(id);
 
         int endPage = 0;
         if (totalContent % displayNum == 0) {
@@ -81,7 +78,11 @@ public class DefaultPostService implements PostService {
         return page;
     }
 
-    private int getTotalContent() {
-        return postMapper.getTotalContent();
+    private int getTotalContent(String id) {
+        int totalContent = 0;
+        if (id.equals("admin")) totalContent = postMapper.getTotalContentOfAdmin();
+        else totalContent = postMapper.getTotalContentOfUser();
+
+        return totalContent;
     }
 }

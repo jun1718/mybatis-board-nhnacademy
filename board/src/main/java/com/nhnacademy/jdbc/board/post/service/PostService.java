@@ -12,9 +12,7 @@ public interface PostService {
     Optional<PostVoAboutDetailUp> getPostUp(Long id);
     List<PostVoAboutDetailDown> getPostDown(Long id);
 
-    List<PostVoAboutList> getPostAll();
-
-    List<PostVoAboutList> getPostAll(int page);
+    List<PostVoAboutList> getPostAll(String id, int page);
 
     Long writePost(Post post);
 
@@ -22,5 +20,5 @@ public interface PostService {
 
     Long modifyPost(Long id,String title,String content);
 
-    int pagination(int page);
+    int pagination(String id, int page);
 }

@@ -23,10 +23,11 @@ public class PostShowController {
     @GetMapping("/showPosts")
     public ModelAndView getPosts(@RequestParam(value = "page", required = false) int page,
                                  HttpSession session) {
-        page = postService.pagination(page);
+        String id = (String) session.getAttribute("id");
+        page = postService.pagination(id, page);
         session.setAttribute("page", page);
 
-        List<PostVoAboutList> posts = postService.getPostAll(page);
+        List<PostVoAboutList> posts = postService.getPostAll(id, page);
 
         ModelAndView mav = new ModelAndView("showPostsForm");
         mav.addObject("posts", posts);

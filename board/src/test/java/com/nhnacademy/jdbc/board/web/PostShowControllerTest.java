@@ -43,14 +43,14 @@ class PostShowControllerTest {
         PostVoAboutList list = new PostVoAboutList(1L, "a", "af", "b", null, null,
             null, 0L, 1);
 
-        when(service.getPostAll()).thenReturn(List.of(list));
+        when(service.getPostAll("admin", 1)).thenReturn(List.of(list));
         mockMvc.perform(get("/showPosts"))
             .andExpect(status().isOk())
             .andExpect(view().name("showPostsForm"))
             .andExpect(model().attributeExists("posts"))
             .andExpect(model().attribute("posts", List.of(list)));
 
-        verify(service, times(1)).getPostAll();
+        verify(service, times(1)).getPostAll("admin", 1);
     }
 
     @Test
