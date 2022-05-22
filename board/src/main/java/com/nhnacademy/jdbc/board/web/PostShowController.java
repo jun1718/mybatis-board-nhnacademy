@@ -29,6 +29,7 @@ public class PostShowController {
         Pagination pagination = new Pagination(20, page, postService.getTotalContent(id));
         page = pagination.getNowPage();
         session.setAttribute("page", page);
+        session.setAttribute("endPage", pagination.getEndPage());
 
         List<PostVoAboutList> posts = postService.getPostAll(id, page);
 

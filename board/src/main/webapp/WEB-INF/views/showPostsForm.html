@@ -47,9 +47,11 @@
             </tr>
             <tr>
                 <td colspan = "11">
+                    <a th:href = "@{/showPosts(page=1)}"><< &nbsp;&nbsp;</a>
                     <a th:href = "@{/showPosts(page=${session.page - 1})}">< </a>
                     <span th:text="${session.page}"></span>
                     <a th:href = "@{/showPosts(page=${session.page + 1})}"> ></a>
+                    <a th:href = "@{/showPosts(page=${session.endPage})}">&nbsp;&nbsp; >></a>
                 </td>
             </tr>
         </table>
