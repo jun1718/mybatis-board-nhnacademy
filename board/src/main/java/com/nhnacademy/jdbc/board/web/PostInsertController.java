@@ -116,7 +116,7 @@ public class PostInsertController {
         re += title;
         postService.writePost(new Post(
             null, postNoAbove, optionalUser.get().getUserNo(), null,
-            new Date(), null, re, content, true, file.getOriginalFilename()));
+            new Date(), null, re, content, true,file.getOriginalFilename()));
         return "redirect:/showPost?postNo=" + postNoAbove;
     }
 }
