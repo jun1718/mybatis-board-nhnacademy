@@ -49,7 +49,7 @@ class PostModifyControllerTest {
                 .param("postTitle","test")
                 .param("postContent","test"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/showPosts"));
+                .andExpect(view().name("redirect:/showPosts?page="+null));
 
         verify(postService, times(1)).modifyPost(any(), any(), any());
 

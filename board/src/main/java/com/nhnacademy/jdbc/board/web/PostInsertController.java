@@ -1,6 +1,9 @@
 package com.nhnacademy.jdbc.board.web;
 
+import com.nhnacademy.jdbc.board.exception.ValidationFailedException;
 import com.nhnacademy.jdbc.board.post.domain.Post;
+import com.nhnacademy.jdbc.board.post.domain.PostRegisterRequest;
+import com.nhnacademy.jdbc.board.post.domain.PostReplyRequset;
 import com.nhnacademy.jdbc.board.post.domain.PostVoAboutDetailUp;
 import com.nhnacademy.jdbc.board.post.service.PostService;
 import com.nhnacademy.jdbc.board.user.domain.User;
@@ -11,11 +14,15 @@ import java.util.Date;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +43,7 @@ public class PostInsertController {
     public ModelAndView insert(HttpServletRequest request,
                                @RequestParam(value = "postNo", required = false)
                                    Long postNoAbove) {
+
         ModelAndView mav = new ModelAndView("showInsertForm");
         ModelAndView failMav = new ModelAndView("redirect:/showPost?postNo=" + postNoAbove);
 
@@ -49,7 +57,9 @@ public class PostInsertController {
         Long postNo = -1L;
         while (n < 6) {
             Optional<PostVoAboutDetailUp> postUp = postService.getPostUp(postNoAbove);
-            if (n == 1) postNo = postUp.get().getPostNo();
+            if (n == 1) {
+                postNo = postUp.get().getPostNo();
+            }
             Optional<Long> postNoAboveReOp = Optional.ofNullable(postUp.get().getPostNoAbove());
             postNoAbove = postNoAboveReOp.orElse(0L);
 
@@ -58,7 +68,6 @@ public class PostInsertController {
             }
             n++;
         }
-
         if (n >= 6) {
             return failMav;
         }
@@ -76,13 +85,22 @@ public class PostInsertController {
 }
 
     @PostMapping("/insert")
-    public String doInsert(@RequestParam("title") String title,
-                           @RequestParam("content") String content,
-                           @RequestParam("file") MultipartFile file,
+    public String doInsert(@Valid @ModelAttribute PostRegisterRequest postRequest,
+                           BindingResult bindingResult,
                            HttpServletRequest request) throws IOException {
-        if (!file.isEmpty()) {
-            file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+        log.warn("------------------------------------------");
+        log.warn("------------------------------------------");
+        log.warn("------------------------------------------");
+        if(bindingResult.hasErrors()) {
+            log.error("" + bindingResult);
+            throw new ValidationFailedException(bindingResult);
         }
+        if(postRequest.getContent().isEmpty() || postRequest.getTitle().isEmpty()){
+            throw new IllegalArgumentException("빈값을 입력하셨습니다.");
+        }
+
+        log.error("postRequset"+postRequest.toString());
+        checkfile(postRequest.getFile());
         HttpSession session = request.getSession(false);
         String attribute = (String) session.getAttribute("id");
         Optional<User> optionalUser = userService.getUserById(attribute);
@@ -91,20 +109,18 @@ public class PostInsertController {
         }
         postService.writePost(new Post(
             null, null, optionalUser.get().getUserNo(), null,
-            new Date(), null, title, content, true, file.getOriginalFilename()));
+            new Date(), null, postRequest.getTitle(), postRequest.getContent(), true, postRequest.getFile().getOriginalFilename()));
         return "redirect:/showPosts?page=" + request.getSession().getAttribute("page");
     }
 
     @PostMapping("/insertReply")
-    public String doInsertReply(@RequestParam("title") String title,
-                                @RequestParam("content") String content,
-                                @RequestParam("file") MultipartFile file,
-                                @RequestParam("postNoAbove") Long postNoAbove,
-                                @RequestParam("RE") String re,
+    public String doInsertReply(@Valid @ModelAttribute PostReplyRequset postReplyReq,
+                                BindingResult bindingResult,
                                 HttpServletRequest request) throws IOException {
-        if (!file.isEmpty()) {
-            file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+        if (bindingResult.hasErrors()) {
+            throw new ValidationFailedException(bindingResult);
         }
+        checkfile(postReplyReq.getFile());
         HttpSession session = request.getSession(false);
         String attribute = (String) session.getAttribute("id");
         Optional<User> optionalUser = userService.getUserById(attribute);
@@ -112,11 +128,17 @@ public class PostInsertController {
         if (optionalUser.isEmpty()) {
             return "redirect:/insert";
         }
+        postReplyReq.setRe(postReplyReq.getRe()+postReplyReq.getTitle());
 
-        re += title;
         postService.writePost(new Post(
-            null, postNoAbove, optionalUser.get().getUserNo(), null,
-            new Date(), null, re, content, true,file.getOriginalFilename()));
-        return "redirect:/showPost?postNo=" + postNoAbove;
+                null, postReplyReq.getPostNoAbove(), optionalUser.get().getUserNo(), null,
+                new Date(), null, postReplyReq.getRe(), postReplyReq.getContent(), true, postReplyReq.getFile().getOriginalFilename()));
+        return "redirect:/showPost?postNo=" + postReplyReq.getPostNoAbove();
+    }
+
+    private void checkfile(MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+        }
     }
 }

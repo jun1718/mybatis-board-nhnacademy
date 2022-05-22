@@ -22,7 +22,7 @@ public class PostShowController {
     }
 
     @GetMapping("/showPosts")
-    public ModelAndView getPosts(@RequestParam(value = "page", required = false) int page,
+    public ModelAndView getPosts(@RequestParam(value = "page", required = false) Integer page,
                                  HttpSession session) {
         String id = (String) session.getAttribute("id");
 

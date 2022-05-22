@@ -60,7 +60,6 @@ public class DefaultPostService implements PostService {
         return postMapper.deleteOrAlive(id);
     }
 
-
     @Override
     @Transactional
     public Long modifyPost(Long postNo, String title, String content) {

@@ -3,6 +3,7 @@ package com.nhnacademy.jdbc.board.post.service;
 import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 
 @Getter
 @Setter
