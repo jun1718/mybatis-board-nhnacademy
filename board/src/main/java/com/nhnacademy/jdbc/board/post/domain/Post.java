@@ -18,4 +18,5 @@ public class Post {
     private final String title;
     private final String content;
     private final Boolean viewActivate;
+    private final String fileName;
 }

@@ -53,7 +53,7 @@ public class PostInsertController {
         }
         postService.writePost(new Post(
                 null, null, optionalUser.get().getUserNo(), null,
-                new Date(), null, title, content, true));
+                new Date(), null, title, content, true,file.getOriginalFilename()));
         return "redirect:/showPosts?page=" + request.getSession().getAttribute("page");
     }
 }
