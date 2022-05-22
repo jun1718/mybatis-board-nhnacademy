@@ -27,6 +27,7 @@
     <br><br>
 
 
+
     <table th:if = "${not #lists.isEmpty(postDown)}">
         <tr>
             <td>댓글작성자이름</td>
@@ -40,12 +41,14 @@
         </tr>
     </table>
 
+    <a th:href = "@{/showPosts(page=${session.page})}">목록으로가기</a>
+    <a th:href = "@{/comment(postNo=${postUp.postNo},userId=${#session.getAttribute('id')})}">댓글쓰기</a>
+    <a th:href = "@{/insertReply(postNo=${postUp.postNo})}">답글쓰기</a>
+
     <span th:if = "${postUp.writerId} == ${#session.getAttribute('id')}
                     or 'admin' == ${#session.getAttribute('id')}">
         <a th:href = "@{/modify(postNo=${postUp.postNo})}">수정</a>
         <a th:href = "@{/deleteAndAlive(postNo=${postUp.postNo})}">삭제</a>
-        <a th:href = "@{/comment(postNo=${postUp.postNo},userId=${#session.getAttribute('id')})}">댓글쓰기</a>
-        <a th:href = "@{/showPosts(page=${session.page})}">목록으로가기</a>
     </span>
 </body>
 </html>
