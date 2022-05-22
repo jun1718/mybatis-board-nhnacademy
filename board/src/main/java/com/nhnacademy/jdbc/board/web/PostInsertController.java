@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Controller
 public class PostInsertController {
-    private static final String UPLOAD_DIR = "D:/file/tmp";
+    private static final String UPLOAD_DIR = "C:\\file\\tmp";
     private final PostService postService;
     private final UserService userService;
 
@@ -70,8 +70,10 @@ public class PostInsertController {
                            @RequestParam("content") String content,
                            @RequestParam("file") MultipartFile file,
                            HttpServletRequest request) throws IOException {
+        log.error("파일 확인 : "+file.getOriginalFilename());
         if (!file.isEmpty()) {
             file.transferTo(Paths.get(UPLOAD_DIR + file.getOriginalFilename()));
+            log.error("파일 확인 : "+file.getOriginalFilename());
         }
         HttpSession session = request.getSession(false);
         String attribute = (String) session.getAttribute("id");
@@ -81,7 +83,7 @@ public class PostInsertController {
         }
         postService.writePost(new Post(
             null, null, optionalUser.get().getUserNo(), null,
-            new Date(), null, title, content, true));
+            new Date(), null, title, content, true,"tmp"+file.getOriginalFilename()));
         return "redirect:/showPosts?page=" + request.getSession().getAttribute("page");
     }
 
@@ -105,7 +107,7 @@ public class PostInsertController {
 
         postService.writePost(new Post(
             null, postNoAbove, optionalUser.get().getUserNo(), null,
-            new Date(), null, title, content, true));
+            new Date(), null, title, content, true,"tmp"+file.getOriginalFilename()));
         return "redirect:/showPost?postNo=" + postNoAbove;
     }
 }

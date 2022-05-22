@@ -11,5 +11,4 @@ public interface LikeService {
 
     Long createLike(Like like);
 
-    Long removeLike(Long likeNo);
 }

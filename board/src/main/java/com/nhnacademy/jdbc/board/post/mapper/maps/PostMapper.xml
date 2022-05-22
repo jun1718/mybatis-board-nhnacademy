@@ -13,7 +13,8 @@
                 ifnull(mo.nickname,"") as `modifierNickname`,
                 p.writed_at as `postWritedAt`,
                 p.modified_at as `postModifiedAt`,
-                p.post_no_above as 'postNoAbove'
+                p.post_no_above as 'postNoAbove',
+                p.file_name as `fileName`
         from Posts as p
                  inner join Users as wr
                             on p.user_no_writer = wr.user_no
@@ -85,13 +86,15 @@
         from Posts
         where view_activate = 1;
     </select>
+    <select id="findPostFileName" resultType="com.nhnacademy.jdbc.board.post.domain.Post">
+        select *
+        from Posts
+        where post_no = #{postNo}
 
-
-
-
+    </select>
     <insert id="insertPost">
-        insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate)
-        values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate})
+        insert into Posts (post_no,post_no_above,user_no_writer,user_no_modifier,writed_at,modified_at,title,content,view_activate,file_name)
+        values (#{post.postNo},#{post.postNoAbove},#{post.userNoWriter},#{post.userNoModifier},#{post.writedAt},#{post.modifiedAt},#{post.title},#{post.content},#{post.viewActivate},#{post.fileName})
     </insert>
     <update id="deleteOrAlive">
 

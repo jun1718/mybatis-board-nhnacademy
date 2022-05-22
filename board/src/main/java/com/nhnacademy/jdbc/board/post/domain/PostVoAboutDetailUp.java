@@ -18,4 +18,5 @@ public class PostVoAboutDetailUp {
     private final Date postWritedAt;
     private final Date postModifiedAt;
     private final Long postNoAbove;
+    private final String fileName;
 }

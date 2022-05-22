@@ -22,6 +22,7 @@ public interface PostMapper {
     List<PostVoAboutList> findAllOfUser(@Param("limit") int limit, @Param("offset") int offset);
     int getTotalContentOfUser();
 
+    Optional<Post> findPostFileName(@Param("postNo") Long postNo);
 
     Long insertPost(@Param("post") Post post);
 
