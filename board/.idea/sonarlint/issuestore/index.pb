@@ -19,5 +19,3 @@ y
 Isrc/test/java/com/nhnacademy/jdbc/board/web/PostInsertControllerTest.java,e\0\e09c3065fa0ad3a557a112465523fb3b0a2abb28
 t
 Dsrc/test/java/com/nhnacademy/jdbc/board/web/LoginControllerTest.java,d\4\d47a6a4f38f637bab84c9404e3cc975b6c5168b0
-r
-Bsrc/main/java/com/nhnacademy/jdbc/board/web/CommentController.java,8\a\8ab4ba97cb4804985a49631fd3199b05f34dafde

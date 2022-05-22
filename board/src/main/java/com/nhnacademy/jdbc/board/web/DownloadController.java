@@ -1,6 +1,8 @@
 package com.nhnacademy.jdbc.board.web;
 
 import com.nhnacademy.jdbc.board.post.service.PostService;
+import java.io.File;
+import java.io.FileInputStream;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,16 +32,22 @@ public class DownloadController {
         String filePath = UPLOAD_DIR + fileName;
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
-        try (InputStream is = Files.newInputStream(Paths.get(filePath));
+        File file = new File(filePath + fileName);
+        try (InputStream is = new FileInputStream(file);
              OutputStream os = response.getOutputStream()) {
+
+            int su = -1;
             byte[] buffer = new byte[4096];
 
-            int n;
-            while (-1 != (n = is.read(buffer))) {
-                os.write(buffer, 0, n);
+            while (-1 != (su = is.read(buffer))) {
+                os.write(su);
             }
+//            while (-1 != (n = is.read(buffer))) {
+//                os.write(buffer, 0, n);
+//                os.write(su);
+//            }
         } catch (IOException ex) {
         }
 
