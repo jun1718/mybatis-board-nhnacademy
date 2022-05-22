@@ -40,7 +40,6 @@
         </tr>
     </table>
 
-    <a href = "/register">등록</a>
     <span th:if = "${postUp.writerId} == ${#session.getAttribute('id')}
                     or 'admin' == ${#session.getAttribute('id')}">
         <a th:href = "@{/modify(postNo=${postUp.postNo})}">수정</a>
