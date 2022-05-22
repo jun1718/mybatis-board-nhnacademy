@@ -14,8 +14,4 @@
         insert into LikesViewCounts(like_no,post_no,user_no)
         values (#{likeNo},#{postNo},#{userNo});
     </insert>
-    <delete id="deleteLike">
-        delete from LikesViewCounts
-        where like_no = #{likeNo};
-    </delete>
 </mapper>

@@ -30,8 +30,4 @@ public class DefaultLikeService implements LikeService {
         return likeMapper.insertLike(like);
     }
 
-    @Override
-    public Long removeLike(Long likeNo) {
-        return likeMapper.deleteLike(likeNo);
-    }
 }

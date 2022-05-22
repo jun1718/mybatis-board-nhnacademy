@@ -66,4 +66,9 @@ public class DefaultPostService implements PostService {
     public Long modifyPost(Long postNo, String title, String content) {
         return postMapper.updatePost(postNo, title, content);
     }
+
+    @Override
+    public Optional<Post> findFileName(Long postNo) {
+        return postMapper.findPostFileName(postNo);
+    }
 }

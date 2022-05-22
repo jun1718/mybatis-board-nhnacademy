@@ -17,5 +17,4 @@ public interface LikeMapper {
 
     Long insertLike(Like like);
 
-    Long deleteLike(@Param("likeNo") Long likeNo);
 }
